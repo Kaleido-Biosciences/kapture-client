@@ -1,0 +1,385 @@
+package com.kaleido.kaptureclient.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.kaleido.kaptureclient.domain.enumeration.StudyEnvironment;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * An instance of an experiment
+ */
+public class Experiment implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
+
+    /**
+     * Holds information on each ex-vivo experiment conducted. Must begin with G followed by one or more digits.
+     */
+    @NotNull
+    @Pattern(regexp = "G\\d+")
+    private String name;
+
+    /**
+     * The environment of study
+     */
+    @NotNull
+    private StudyEnvironment studyEnvironment;
+
+    /**
+     * The name of the study is the experiment name and study environment
+     */
+    private String studyName;
+
+    /**
+     * The start date of the experiment
+     */
+    private LocalDate startDate;
+
+    /**
+     * The description of the study
+     */
+    private String description;
+
+    /**
+     * The goals of the study
+     */
+    private String goals;
+
+    /**
+     * The number of plates
+     */
+    @Min(value = 0)
+    private Integer numberOfPlates;
+
+    /**
+     * The percent of the total sample made up by a fecal slurry
+     */
+    private Double slurryPercent;
+
+    /**
+     * Experiment notes
+     */
+    private String notes;
+
+    /**
+     * The scientist associated with the experiment
+     */
+    @JsonIgnoreProperties("")
+    private Scientist scientist;
+
+    /**
+     * The type of endpoint
+     */
+    @NotNull
+    @JsonIgnoreProperties("")
+    private Concept location;
+
+    /**
+     * Which chamber was used
+     */
+    @JsonIgnoreProperties("")
+    private Concept chamber;
+
+    /**
+     * The Status of the experiment
+     */
+    @JsonIgnoreProperties("")
+    private Concept status;
+
+    /**
+     * The processing method of the experiment
+     */
+    @JsonIgnoreProperties("")
+    private Concept processingMethod;
+
+    /**
+     * The plate types associated with the experiment
+     */
+    private Set<PlateType> plateTypes = new HashSet<>();
+
+    /**
+     * The plate types associated with the experiment
+     */
+    private Set<Concept> assayTypes = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Experiment name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public StudyEnvironment getStudyEnvironment() {
+        return studyEnvironment;
+    }
+
+    public Experiment studyEnvironment(StudyEnvironment studyEnvironment) {
+        this.studyEnvironment = studyEnvironment;
+        return this;
+    }
+
+    public void setStudyEnvironment(StudyEnvironment studyEnvironment) {
+        this.studyEnvironment = studyEnvironment;
+    }
+
+    public String getStudyName() {
+        return studyName;
+    }
+
+    public Experiment studyName(String studyName) {
+        this.studyName = studyName;
+        return this;
+    }
+
+    public void setStudyName(String studyName) {
+        this.studyName = studyName;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public Experiment startDate(LocalDate startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Experiment description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getGoals() {
+        return goals;
+    }
+
+    public Experiment goals(String goals) {
+        this.goals = goals;
+        return this;
+    }
+
+    public void setGoals(String goals) {
+        this.goals = goals;
+    }
+
+    public Integer getNumberOfPlates() {
+        return numberOfPlates;
+    }
+
+    public Experiment numberOfPlates(Integer numberOfPlates) {
+        this.numberOfPlates = numberOfPlates;
+        return this;
+    }
+
+    public void setNumberOfPlates(Integer numberOfPlates) {
+        this.numberOfPlates = numberOfPlates;
+    }
+
+    public Double getSlurryPercent() {
+        return slurryPercent;
+    }
+
+    public Experiment slurryPercent(Double slurryPercent) {
+        this.slurryPercent = slurryPercent;
+        return this;
+    }
+
+    public void setSlurryPercent(Double slurryPercent) {
+        this.slurryPercent = slurryPercent;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public Experiment notes(String notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public Scientist getScientist() {
+        return scientist;
+    }
+
+    public Experiment scientist(Scientist scientist) {
+        this.scientist = scientist;
+        return this;
+    }
+
+    public void setScientist(Scientist scientist) {
+        this.scientist = scientist;
+    }
+
+    public Concept getLocation() {
+        return location;
+    }
+
+    public Experiment location(Concept concept) {
+        this.location = concept;
+        return this;
+    }
+
+    public void setLocation(Concept concept) {
+        this.location = concept;
+    }
+
+    public Concept getChamber() {
+        return chamber;
+    }
+
+    public Experiment chamber(Concept concept) {
+        this.chamber = concept;
+        return this;
+    }
+
+    public void setChamber(Concept concept) {
+        this.chamber = concept;
+    }
+
+    public Concept getStatus() {
+        return status;
+    }
+
+    public Experiment status(Concept concept) {
+        this.status = concept;
+        return this;
+    }
+
+    public void setStatus(Concept concept) {
+        this.status = concept;
+    }
+
+    public Concept getProcessingMethod() {
+        return processingMethod;
+    }
+
+    public Experiment processingMethod(Concept concept) {
+        this.processingMethod = concept;
+        return this;
+    }
+
+    public void setProcessingMethod(Concept concept) {
+        this.processingMethod = concept;
+    }
+
+    public Set<PlateType> getPlateTypes() {
+        return plateTypes;
+    }
+
+    public Experiment plateTypes(Set<PlateType> plateTypes) {
+        this.plateTypes = plateTypes;
+        return this;
+    }
+
+    public Experiment addPlateTypes(PlateType plateType) {
+        this.plateTypes.add(plateType);
+        return this;
+    }
+
+    public Experiment removePlateTypes(PlateType plateType) {
+        this.plateTypes.remove(plateType);
+        return this;
+    }
+
+    public void setPlateTypes(Set<PlateType> plateTypes) {
+        this.plateTypes = plateTypes;
+    }
+
+    public Set<Concept> getAssayTypes() {
+        return assayTypes;
+    }
+
+    public Experiment assayTypes(Set<Concept> concepts) {
+        this.assayTypes = concepts;
+        return this;
+    }
+
+    public Experiment addAssayTypes(Concept concept) {
+        this.assayTypes.add(concept);
+        return this;
+    }
+
+    public Experiment removeAssayTypes(Concept concept) {
+        this.assayTypes.remove(concept);
+        return this;
+    }
+
+    public void setAssayTypes(Set<Concept> concepts) {
+        this.assayTypes = concepts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Experiment experiment = (Experiment) o;
+        if (experiment.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), experiment.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Experiment{" +
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", studyEnvironment='" + getStudyEnvironment() + "'" +
+            ", studyName='" + getStudyName() + "'" +
+            ", startDate='" + getStartDate() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", goals='" + getGoals() + "'" +
+            ", numberOfPlates=" + getNumberOfPlates() +
+            ", slurryPercent=" + getSlurryPercent() +
+            ", notes='" + getNotes() + "'" +
+            "}";
+    }
+}

@@ -1,0 +1,31 @@
+image: docker:latest
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay
+  SPRING_PROFILES_ACTIVE: default
+
+stages:
+  - build
+  - package
+  - deploy
+
+maven-build:
+  image: maven:3.5.4-jdk-8-alpine
+  stage: build
+  script: "mvn package -B"
+  artifacts:
+    paths:
+      - airtable-utils/target/*.jar
+      - id-generator/target/*.jar
+      - kapture-client/target/*.jar
+
+maven-deploy-capture-client:
+  image: maven:3.5.4-jdk-8-alpine
+  stage: deploy
+  script:
+    - cd kapture-client
+    - mvn clean deploy
+  only:
+    - master
