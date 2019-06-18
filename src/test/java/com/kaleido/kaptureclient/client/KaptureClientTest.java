@@ -1110,10 +1110,10 @@ public class KaptureClientTest {
 
     @Test
     public void findByFieldsEqualUri() {
-        String uriString = kaptureClientProperties.getBase() + kaptureClientProperties.getBatchEndpoint() + "?foo.equals=baa&foz.equals=baz&page=0&size=20";
+        String uriString = kaptureClientProperties.getBase() + kaptureClientProperties.getBatchEndpoint() + "?foo.equals=baa&foz.equals=baz%20%2B%20boz&page=0&size=20";
         Map<String, String> params = new LinkedHashMap<>();
         params.put("foo", "baa");
-        params.put("foz", "baz");
+        params.put("foz", "baz + boz");
         URI uri = kaptureClient.findByFieldsEqualUri(params, 0, 20);
         assertEquals(uriString, uri.toString());
     }

@@ -14,6 +14,7 @@ import org.springframework.retry.support.RetryTemplate;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -525,14 +526,20 @@ public class KaptureClient<E> {
      * @return the URI that can be called to execute the search
      */
     protected URI findByFieldsEqualUri(Map<String, String> fieldValMap, int pageNumber, int pageSize) {
+
+        DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory();
+        factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.VALUES_ONLY);
+
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint);
 
-        fieldValMap.forEach((key, value) -> builder.queryParam(key + ".equals", value));
+        //construct parts of the template to be expanded by the factory
+        fieldValMap.forEach((key, value) -> builder.queryParam(key + ".equals", "{"+key+"}"));
 
         //add the page number and page size parameters to the query
         builder.queryParam(PAGE, pageNumber).queryParam(SIZE, pageSize);
 
-        return builder.build().toUri();
+        String uriTemplate = builder.build().toUriString();
+        return factory.uriString(uriTemplate).build(fieldValMap);
     }
 
     /**

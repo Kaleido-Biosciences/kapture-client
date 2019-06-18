@@ -5,7 +5,7 @@
 
     <groupId>com.kaleido</groupId>
     <artifactId>kapture-client</artifactId>
-    <version>2.3.5</version>
+    <version>2.3.6</version>
     <name>kapture-client</name>
     <packaging>jar</packaging>
 
