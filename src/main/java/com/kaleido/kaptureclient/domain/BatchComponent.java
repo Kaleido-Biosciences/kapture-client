@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,7 +15,6 @@ import java.util.Objects;
 /**
  * A batch component is one component that makes up a batch that is a combination (KC). Was compound-combination in expt-db
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class BatchComponent implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +41,7 @@ public class BatchComponent implements Serializable {
     @JsonIgnoreProperties("")
     private Batch batch;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -84,6 +88,7 @@ public class BatchComponent implements Serializable {
     public void setBatch(Batch batch) {
         this.batch = batch;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

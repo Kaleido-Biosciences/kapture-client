@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import javax.validation.constraints.NotNull;
@@ -16,6 +20,7 @@ public class AnalyteType implements Serializable {
     @NotNull
     private String name;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -36,6 +41,7 @@ public class AnalyteType implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

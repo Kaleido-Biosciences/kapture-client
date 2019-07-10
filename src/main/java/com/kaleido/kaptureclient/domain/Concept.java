@@ -1,7 +1,10 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,7 +18,6 @@ import java.util.Set;
  * it would be called a Term
  * @author Mark Schreiber
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Concept implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,6 +61,7 @@ public class Concept implements Serializable {
     @NotNull
     private ConceptScheme scheme;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }

@@ -1,7 +1,10 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -13,7 +16,6 @@ import java.util.Set;
 /**
  * The specification of a chemical class
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChemicalConcept implements Serializable {
 
     private static final long serialVersionUID = 1L;

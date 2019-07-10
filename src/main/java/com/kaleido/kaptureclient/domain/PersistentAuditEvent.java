@@ -1,6 +1,8 @@
-package com.kaleido.kaptureclient.domain;
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package com.kaleido.kaptureclient.domain;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,8 +12,9 @@ import java.util.Map;
 
 /**
  * Persist AuditEvent managed by the Spring Boot actuator.
+ *
+ * @see org.springframework.boot.actuate.audit.AuditEvent
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class PersistentAuditEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;

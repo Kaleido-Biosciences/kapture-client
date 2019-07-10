@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,9 +29,11 @@ public class Platemap implements Serializable {
 
     /**
      * The experiment for the platemap
+     * @deprecated It is now recommended that samples be directly connected to the experiment that created them rather
+     * than via a platemap.
      */
-    @NotNull
     @JsonIgnoreProperties("")
+    @Deprecated
     private Experiment experiment;
 
     @JsonIgnoreProperties("")
@@ -36,6 +42,7 @@ public class Platemap implements Serializable {
     @JsonIgnoreProperties("")
     private PlateType plateType;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -95,6 +102,7 @@ public class Platemap implements Serializable {
     public void setPlateType(PlateType plateType) {
         this.plateType = plateType;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

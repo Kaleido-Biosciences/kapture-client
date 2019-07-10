@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.authentication;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

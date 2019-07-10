@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -5,7 +9,7 @@ import org.springframework.retry.annotation.EnableRetry;
 
 /**
  * Holds properties from externalized configuration such as environment variables or {@code application.properties} files.
- * Any variable begining with {@code kapture.client} or for environment variables {@code KAPTURE_CLIENT} and matching
+ * Any variable beginning with {@code kapture.client} or for environment variables {@code KAPTURE_CLIENT} and matching
  * a field of this class will over-ride the default value. For example, {@code kapture.client.password=secret} will set
  * the value of the password used by the client.
  * Default values are set to interact with the {@code dev} profile of Kapture and are suitable for development and testing
@@ -31,8 +35,11 @@ public class KaptureClientProperties {
     private String batchEndpoint = "batches";
     private String batchAliasEndpoint = "batch-aliases";
     private String batchComponentEndpoint = "batch-components";
+    private String batchLotEndpoint = "batch-lots";
+    private String batchLotCompositionEndpoint = "batch-lot-compositions";
     private String chemicalConceptEndpoint = "chemical-concepts";
     private String communityEndpoint = "communities";
+    private String communityCompositionEndpoint = "community-compositions";
     private String conceptEndpoint = "concepts";
     private String conceptSchemeEndpoint = "concept-schemes";
     private String experimentEndpoint = "experiments";
@@ -41,6 +48,8 @@ public class KaptureClientProperties {
     private String mediaEndpoint = "media";
     private String monomerEndpoint = "monomers";
     private String monomerCompositionEndpoint = "monomer-compositions";
+    private String mediaLotEndpoint = "media-lots";
+    private String mediaLotCompositionEndpoint = "media-lot-compositions";
     private String nmrAssayEndpoint = "nmr-assays";
     private String nmrPeakEndpoint = "nmr-peaks";
     private String noteEndpoint = "notes";
@@ -55,8 +64,10 @@ public class KaptureClientProperties {
     private String sampleTreatmentEndpoint = "sample-treatments";
     private String scientistEndpoint = "scientists";
     private String sequencingRunEndpoint = "sequencing-runs";
+    private String supplementEndpoint = "supplements";
     private String userEndpoint = "users";
     private String wellEndpoint = "wells";
+
     private long retryInterval = 5000L;
     private double retryMultiplier = 2.0D;
     private long maxRetryInterval = 15000L;
@@ -412,5 +423,53 @@ public class KaptureClientProperties {
 
     public void setMaxRequestAttempts(int maxRequestAttempts) {
         this.maxRequestAttempts = maxRequestAttempts;
+    }
+
+    public String getBatchLotEndpoint() {
+        return batchLotEndpoint;
+    }
+
+    public void setBatchLotEndpoint(String batchLotEndpoint){
+        this.batchLotEndpoint = batchLotEndpoint;
+    }
+
+    public String getBatchLotCompositionEndpoint() {
+        return batchLotCompositionEndpoint;
+    }
+
+    public String getCommunityCompositionEndpoint() {
+        return communityCompositionEndpoint;
+    }
+
+    public void setCommunityCompositionEndpoint(String communityCompositionEndpoint) {
+        this.communityCompositionEndpoint = communityCompositionEndpoint;
+    }
+
+    public String getMediaLotEndpoint() {
+        return mediaLotEndpoint;
+    }
+
+    public void setMediaLotEndpoint(String mediaLotEndpoint) {
+        this.mediaLotEndpoint = mediaLotEndpoint;
+    }
+
+    public String getMediaLotCompositionEndpoint() {
+        return mediaLotCompositionEndpoint;
+    }
+
+    public void setMediaLotCompositionEndpoint(String mediaLotCompositionEndpoint) {
+        this.mediaLotCompositionEndpoint = mediaLotCompositionEndpoint;
+    }
+
+    public String getSupplementEndpoint() {
+        return supplementEndpoint;
+    }
+
+    public void setSupplementEndpoint(String supplementEndpoint) {
+        this.supplementEndpoint = supplementEndpoint;
+    }
+
+    public void setBatchLotCompositionEndpoint(String batchLotCompositionEndpoint) {
+        this.batchLotCompositionEndpoint = batchLotCompositionEndpoint;
     }
 }

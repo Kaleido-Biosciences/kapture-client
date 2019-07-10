@@ -5,8 +5,8 @@
 package com.kaleido.kaptureclient.domain.enumeration;
 
 /**
- * The Material enumeration.
+ * The CommunityType enumeration.
  */
-public enum Material {
-    Polystyrene, Polypropylene
+public enum CommunityType {
+    Community, Strain
 }
