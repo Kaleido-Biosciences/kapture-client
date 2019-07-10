@@ -1,7 +1,10 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kaleido.kaptureclient.domain.enumeration.AssociationType;
 
 import javax.validation.constraints.NotNull;
@@ -17,11 +20,9 @@ import java.util.Set;
  * association type.
  * @author Mark Schreiber
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Association implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
 
     private Long id;
 
@@ -51,6 +52,7 @@ public class Association implements Serializable {
     @NotNull
     private Concept object;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }

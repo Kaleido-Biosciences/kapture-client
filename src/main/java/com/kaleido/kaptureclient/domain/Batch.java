@@ -1,6 +1,9 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kaleido.kaptureclient.domain.enumeration.GeneralQuestion;
 
 import javax.validation.constraints.NotNull;
@@ -13,7 +16,6 @@ import java.util.Set;
 /**
  * A chemically synthesized batch
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Batch implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,184 +36,130 @@ public class Batch implements Serializable {
     /**
      * status of the batch
      */
-    
-    
     private String status;
 
     /**
      * Molecular Number
      */
-    
-    
     private Float mn;
 
     /**
      * The person who registered this batch
      */
-    
-    
     private String createdBy;
 
     /**
      * NMR status
      */
-    
-    
     private String nMRStatus;
 
     /**
      * Reference to the notebook entry describing the synthesis
      */
-    
-    
     private String notebook;
 
     /**
      * the Enzyme used in the synthesis
      */
-    
-    
     private String enzyme;
 
     /**
      * The date the batch was manufactured
      */
-    
-    
     private ZonedDateTime mfgDate;
 
     /**
      * purity of the synthesis
      */
-    
-    
     private Float purity;
 
     /**
      * The time the batch was registered
      */
-    
-    
     private ZonedDateTime dateCreated;
 
     /**
      * The person who manufactured the batch
      */
-    
-    
     private String mfgBy;
 
     /**
      * Molecular weight in Daltons
      */
-    
-    
     private String mw;
 
     /**
      * Method used to determine purity
      */
-    
-    
     private String purityType;
 
     /**
      * The total synthetic reaction volume
      */
-    
-    
     private Float scale;
 
     /**
      * The percent of monomers, eg. Ara50Glu50
      */
-    
-    
     private String glycanComposition;
 
     /**
      * The name of any precursor
      */
-    
-    
     private String precursor;
 
     /**
      * Method used in synthesis
      */
-    
-    
     private String syntheticMethod;
 
     /**
      * LIMS registration record
      */
-    
-    
     private String dataRecordName;
 
-    
     private Double pdi;
 
     /**
      * Average degree of polymerization
      */
-    
-    
     private Double aveDP;
 
     /**
      * additional notes
      */
-    
-    
     private String notes;
 
-    
-    
     private GeneralQuestion isVitaminOrPolyphenol;
 
-    
-    
     private GeneralQuestion isFoodGrade;
 
-    
-    
     private GeneralQuestion isNMer;
 
-    
-    
     private GeneralQuestion isSoluble;
 
     /**
      * 3rd Party unique identifier (e.g. lot number)
      */
-    
-    
     private String sourceIdentifier;
 
-    
-    
+    /**
+     * the volume of available solids when making a new batch
+     */
+    private Double availableSolid;
 
+    /**
+     * the volume unit of available solids when making a new batch
+     */
+    private String availableSolidUnits;
 
     private Set<BatchAlias> aliases = new HashSet<>();
-
-    
-    
-    
-
 
     private Set<ChemicalConcept> concepts = new HashSet<>();
 
     /**
      * The batch associated with a monomer composition
      */
-    
-    
-    
-    
-
-
     private Set<MonomerComposition> monomerCompositions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -574,6 +522,32 @@ public class Batch implements Serializable {
         this.sourceIdentifier = sourceIdentifier;
     }
 
+    public Double getAvailableSolid() {
+        return availableSolid;
+    }
+
+    public Batch availableSolid(Double availableSolid) {
+        this.availableSolid = availableSolid;
+        return this;
+    }
+
+    public void setAvailableSolid(Double availableSolid) {
+        this.availableSolid = availableSolid;
+    }
+
+    public String getAvailableSolidUnits() {
+        return availableSolidUnits;
+    }
+
+    public Batch availableSolidUnits(String availableSolidUnits) {
+        this.availableSolidUnits = availableSolidUnits;
+        return this;
+    }
+
+    public void setAvailableSolidUnits(String availableSolidUnits) {
+        this.availableSolidUnits = availableSolidUnits;
+    }
+
     public Set<BatchAlias> getAliases() {
         return aliases;
     }
@@ -699,6 +673,8 @@ public class Batch implements Serializable {
             ", isNMer='" + getIsNMer() + "'" +
             ", isSoluble='" + getIsSoluble() + "'" +
             ", sourceIdentifier='" + getSourceIdentifier() + "'" +
+            ", availableSolid=" + getAvailableSolid() +
+            ", availableSolidUnits='" + getAvailableSolidUnits() + "'" +
             "}";
     }
 }

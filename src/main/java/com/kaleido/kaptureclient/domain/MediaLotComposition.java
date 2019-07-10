@@ -6,30 +6,38 @@ package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A sequencing run
+ * A Percent of a MediaLot
  */
-public class SequencingRun implements Serializable {
+public class MediaLotComposition implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
     /**
-     * name of the sequencing run
+     * The name of the media lot composition
      */
     @NotNull
     private String name;
 
     /**
-     * File associated with the sequencing run
+     * A percent for the selected Community
      */
+    @NotNull
+    @DecimalMin(value = "0")
+    @DecimalMax(value = "100")
+    private Double mediaLotPercent;
+
+    @NotNull
     @JsonIgnoreProperties("")
-    private ImportedFile importedFile;
+    private MediaLot mediaLot;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -44,7 +52,7 @@ public class SequencingRun implements Serializable {
         return name;
     }
 
-    public SequencingRun name(String name) {
+    public MediaLotComposition name(String name) {
         this.name = name;
         return this;
     }
@@ -53,17 +61,30 @@ public class SequencingRun implements Serializable {
         this.name = name;
     }
 
-    public ImportedFile getImportedFile() {
-        return importedFile;
+    public Double getMediaLotPercent() {
+        return mediaLotPercent;
     }
 
-    public SequencingRun importedFile(ImportedFile importedFile) {
-        this.importedFile = importedFile;
+    public MediaLotComposition mediaLotPercent(Double mediaLotPercent) {
+        this.mediaLotPercent = mediaLotPercent;
         return this;
     }
 
-    public void setImportedFile(ImportedFile importedFile) {
-        this.importedFile = importedFile;
+    public void setMediaLotPercent(Double mediaLotPercent) {
+        this.mediaLotPercent = mediaLotPercent;
+    }
+
+    public MediaLot getMediaLot() {
+        return mediaLot;
+    }
+
+    public MediaLotComposition mediaLot(MediaLot mediaLot) {
+        this.mediaLot = mediaLot;
+        return this;
+    }
+
+    public void setMediaLot(MediaLot mediaLot) {
+        this.mediaLot = mediaLot;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -75,11 +96,11 @@ public class SequencingRun implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SequencingRun sequencingRun = (SequencingRun) o;
-        if (sequencingRun.getId() == null || getId() == null) {
+        MediaLotComposition mediaLotComposition = (MediaLotComposition) o;
+        if (mediaLotComposition.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), sequencingRun.getId());
+        return Objects.equals(getId(), mediaLotComposition.getId());
     }
 
     @Override
@@ -89,9 +110,10 @@ public class SequencingRun implements Serializable {
 
     @Override
     public String toString() {
-        return "SequencingRun{" +
+        return "MediaLotComposition{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", mediaLotPercent=" + getMediaLotPercent() +
             "}";
     }
 }

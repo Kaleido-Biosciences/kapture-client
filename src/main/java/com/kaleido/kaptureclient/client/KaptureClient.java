@@ -1,9 +1,11 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.client;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.ParameterizedTypeReference;
@@ -20,8 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -280,116 +280,6 @@ public class KaptureClient<E> {
         });
     }
 
-    private void processEntityCollection(Collection<E> collection, Class itemClazz, Deque<E> stack, boolean update)
-            throws IntrospectionException, ReflectiveOperationException {
-        for (E o : collection) {
-            if (o != null && !BeanUtils.isSimpleValueType(o.getClass())
-                    && itemClazz.getPackage().getName().equals(o.getClass().getPackage().getName())) {
-                traverse(o, stack, update);
-            }
-        }
-    }
-
-    public void traverse(Object item, Deque<E> stack, boolean update)
-            throws IntrospectionException, ReflectiveOperationException {
-        Class itemClazz = item.getClass();
-        Field[] fields = itemClazz.getDeclaredFields();
-        if (fields != null && fields.length > 0) {
-            // item is a complex object
-            for (Field field : fields) {
-                // push item to the stack if item has a field called "id" and it is not set or  updateFlag is set
-                if (field.getName().equals("id") && (update ||
-                        new PropertyDescriptor("id", itemClazz).getReadMethod().invoke(item) == null)) {
-                    stack.push((E) (item));
-                }
-                if (BeanUtils.isSimpleValueType(field.getType())) continue;
-
-                Object fieldObj = PropertyUtils.getProperty(itemClazz.cast(item), field.getName());
-                if (fieldObj instanceof Collection) {
-                    processEntityCollection((Collection<E>) fieldObj, itemClazz, stack, update);
-                } else if (PropertyUtils.getProperty(itemClazz.cast(item), field.getName()) != null
-                        && itemClazz.getPackage().getName().equals(field.getType().getPackage().getName())) {
-                    // traverse field object if it is not null, not simple Object and is in the same package as item
-                    traverse(PropertyUtils.getProperty(itemClazz.cast(item), field.getName()), stack, update);
-                }
-
-            }
-        }
-    }
-
-    /**
-     * Persist an entity and all its related entity if there are not already created.
-     * Note that the saveAndUpdate function is generic and can be used by any entities
-     * If the entity has an {@code id} an attempt will be made to update it. If it doesn't have an
-     * {@code id} a new entity will be created.
-     *
-     * @param entity the entity to create
-     * @return A response with a Body equal to the created entity. If created the {@code id} will now be
-     * set.
-     */
-    public ResponseEntity<E> saveAndUpdate(@Valid E entity, boolean update) {
-        return retryTemplate.execute(arg0 -> {
-            try {
-                Deque<E> stack = new ArrayDeque();
-                traverse(entity, stack, update);
-                return persistEntities(stack);
-            } catch (IntrospectionException | ReflectiveOperationException e) {
-                log.error("Error accessing ID of entity {}", entity);
-                throw new RuntimeException(e);
-            }
-        });
-    }
-
-    /**
-     * @param stack contains an entity and its sub entities that need to be created or updated in the database
-     * @return the updated entity
-     * @throws IllegalAccessException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     */
-    public ResponseEntity<E> persistEntities(Deque<E> stack)
-            throws ReflectiveOperationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        return retryTemplate.execute(arg0 -> {
-            ResponseEntity<E> response = null;
-            for (E item : stack) {
-                //response = kaptureClientConfiguration.getClient(item.getClass().getName()).save(item);
-                response = getClient(item.getClass()).save(item);
-                long id = (Long) PropertyUtils.getProperty(item.getClass().cast(response.getBody()), "id");
-                PropertyUtils.setProperty(item, "id", id);
-            }
-            return response;
-        });
-    }
-
-
-    /**
-     * Save an entity and all its related entity if there are not already created.
-     * Note that the cascade save function must be enabled per Entity beforehand
-     * If the entity has an {@code id} an attempt will be made to update it. If it doesn't have an
-     * {@code id} a new entity will be created.
-     *
-     * @param entity the entity to create
-     * @return A response with a Body equal to the created entity. If created the {@code id} will now be
-     * set.
-     */
-    public ResponseEntity<E> saveWithCascade(@Valid E entity) {
-        return retryTemplate.execute(arg0 -> {
-            try {
-                Long id = (Long) new PropertyDescriptor("id", entityClass).getReadMethod().invoke(entity);
-                if (id == null) {
-                    //no id, POST it
-                    return restTemplate.postForEntity(endpoint + "?cascadeSave=true", entity, entityClass);
-                } else {
-                    //got an id, PUT it
-                    HttpEntity<E> httpEntity = new HttpEntity<>(entity);
-                    return restTemplate.exchange(endpoint + "?cascadeSave=true", HttpMethod.PUT, httpEntity, entityClass);
-                }
-            } catch (IntrospectionException | ReflectiveOperationException e) {
-                log.error("Error accessing ID of entity {}", entity);
-                throw new RuntimeException(e);
-            }
-        });
-    }
 
     /**
      * Deletes the entity with the matching {@code entityId}.

@@ -1,7 +1,10 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -13,7 +16,6 @@ import java.util.Set;
 /**
  * An alternative name for a Batch
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class BatchAlias implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +51,7 @@ public class BatchAlias implements Serializable {
     @JsonIgnore
     private Set<Batch> batches = new HashSet<>();
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }

@@ -1,6 +1,8 @@
-package com.kaleido.kaptureclient.domain;
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package com.kaleido.kaptureclient.domain;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,7 +12,7 @@ import java.util.Objects;
  * A synonym
  * @author Mark Schreiber
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class AltLabel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,6 +27,7 @@ public class AltLabel implements Serializable {
      */
     private Concept synonymOf;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -58,6 +61,7 @@ public class AltLabel implements Serializable {
     public void setSynonymOf(Concept concept) {
         this.synonymOf = concept;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
