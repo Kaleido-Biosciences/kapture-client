@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,6 +41,7 @@ public class MonomerComposition implements Serializable {
     @JsonIgnoreProperties("")
     private Monomer monomer;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -83,6 +88,7 @@ public class MonomerComposition implements Serializable {
     public void setMonomer(Monomer monomer) {
         this.monomer = monomer;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

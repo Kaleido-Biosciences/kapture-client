@@ -1,4 +1,8 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 /**
- * Domain objects representing Kapture entities.
+ * Kapture domain objects.
  */
 package com.kaleido.kaptureclient.domain;

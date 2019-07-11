@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -71,6 +75,11 @@ public class Experiment implements Serializable {
     private String notes;
 
     /**
+     * LIMS registration record
+     */
+    private String dataRecordName;
+
+    /**
      * The scientist associated with the experiment
      */
     @JsonIgnoreProperties("")
@@ -103,14 +112,17 @@ public class Experiment implements Serializable {
 
     /**
      * The plate types associated with the experiment
+     * @deprecated plate types should now be associated from their platemap
      */
+    @Deprecated
     private Set<PlateType> plateTypes = new HashSet<>();
 
     /**
-     * The plate types associated with the experiment
+     * The Assay types associated with the experiment
      */
     private Set<Concept> assayTypes = new HashSet<>();
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -236,6 +248,19 @@ public class Experiment implements Serializable {
         this.notes = notes;
     }
 
+    public String getDataRecordName() {
+        return dataRecordName;
+    }
+
+    public Experiment dataRecordName(String dataRecordName) {
+        this.dataRecordName = dataRecordName;
+        return this;
+    }
+
+    public void setDataRecordName(String dataRecordName) {
+        this.dataRecordName = dataRecordName;
+    }
+
     public Scientist getScientist() {
         return scientist;
     }
@@ -301,25 +326,30 @@ public class Experiment implements Serializable {
         this.processingMethod = concept;
     }
 
+    @Deprecated
     public Set<PlateType> getPlateTypes() {
         return plateTypes;
     }
 
+    @Deprecated
     public Experiment plateTypes(Set<PlateType> plateTypes) {
         this.plateTypes = plateTypes;
         return this;
     }
 
+    @Deprecated
     public Experiment addPlateTypes(PlateType plateType) {
         this.plateTypes.add(plateType);
         return this;
     }
 
+    @Deprecated
     public Experiment removePlateTypes(PlateType plateType) {
         this.plateTypes.remove(plateType);
         return this;
     }
 
+    @Deprecated
     public void setPlateTypes(Set<PlateType> plateTypes) {
         this.plateTypes = plateTypes;
     }
@@ -346,6 +376,7 @@ public class Experiment implements Serializable {
     public void setAssayTypes(Set<Concept> concepts) {
         this.assayTypes = concepts;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -380,6 +411,7 @@ public class Experiment implements Serializable {
             ", numberOfPlates=" + getNumberOfPlates() +
             ", slurryPercent=" + getSlurryPercent() +
             ", notes='" + getNotes() + "'" +
+            ", dataRecordName='" + getDataRecordName() + "'" +
             "}";
     }
 }

@@ -1,6 +1,8 @@
-package com.kaleido.kaptureclient.domain;
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package com.kaleido.kaptureclient.domain;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,7 +12,6 @@ import java.util.Objects;
 /**
  * Observed Taxonomic Unit (OTU)
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ObservedTaxonomicUnit implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -78,6 +79,7 @@ public class ObservedTaxonomicUnit implements Serializable {
      */
     private ZonedDateTime timestamp;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -207,13 +209,13 @@ public class ObservedTaxonomicUnit implements Serializable {
         return strain;
     }
 
-    public void setStrain(String strain) {
-        this.strain = strain;
-    }
-
     public ObservedTaxonomicUnit strain(String strain) {
         this.strain = strain;
         return this;
+    }
+
+    public void setStrain(String strain) {
+        this.strain = strain;
     }
 
     public String getPlatform() {
@@ -229,7 +231,6 @@ public class ObservedTaxonomicUnit implements Serializable {
         this.platform = platform;
     }
 
-
     public ZonedDateTime getTimestamp() {
         return timestamp;
     }
@@ -239,7 +240,10 @@ public class ObservedTaxonomicUnit implements Serializable {
         return this;
     }
 
-    public void setTimestamp(ZonedDateTime timestamp) { this.timestamp = timestamp; }
+    public void setTimestamp(ZonedDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

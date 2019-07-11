@@ -1,6 +1,8 @@
-package com.kaleido.kaptureclient.domain;
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package com.kaleido.kaptureclient.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,7 +10,6 @@ import java.util.Objects;
 /**
  * The value of a readout after processing such as normalization by dilution factor. In screen-db was AssayReadout
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProcessedReadout implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,8 +26,14 @@ public class ProcessedReadout implements Serializable {
      */
     private String unit;
 
+    /**
+     * The name of the statistical protocol that was used to process this readout
+     */
+    private String protocolName;
+
     private AssayReadout assayReadout;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -61,6 +68,19 @@ public class ProcessedReadout implements Serializable {
         this.unit = unit;
     }
 
+    public String getProtocolName() {
+        return protocolName;
+    }
+
+    public ProcessedReadout protocolName(String protocolName) {
+        this.protocolName = protocolName;
+        return this;
+    }
+
+    public void setProtocolName(String protocolName) {
+        this.protocolName = protocolName;
+    }
+
     public AssayReadout getAssayReadout() {
         return assayReadout;
     }
@@ -73,6 +93,7 @@ public class ProcessedReadout implements Serializable {
     public void setAssayReadout(AssayReadout assayReadout) {
         this.assayReadout = assayReadout;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -100,6 +121,7 @@ public class ProcessedReadout implements Serializable {
             "id=" + getId() +
             ", value=" + getValue() +
             ", unit='" + getUnit() + "'" +
+            ", protocolName='" + getProtocolName() + "'" +
             "}";
     }
 }

@@ -1,6 +1,10 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -8,23 +12,28 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A user.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class User implements Serializable {
+public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
     @NotNull
-    @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     private String login;
+
+    @JsonIgnore
+    @NotNull
+    @Size(min = 60, max = 60)
+    private String password;
 
     @Size(max = 50)
     private String firstName;
@@ -45,7 +54,18 @@ public class User implements Serializable {
     @Size(max = 256)
     private String imageUrl;
 
+    @Size(max = 20)
+    @JsonIgnore
+    private String activationKey;
+
+    @Size(max = 20)
+    @JsonIgnore
+    private String resetKey;
+
     private Instant resetDate = null;
+
+    @JsonIgnore
+    private Set<Authority> authorities = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -62,6 +82,14 @@ public class User implements Serializable {
     // Lowercase the login before saving it in database
     public void setLogin(String login) {
         this.login = login.toLowerCase(Locale.ENGLISH);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -104,6 +132,22 @@ public class User implements Serializable {
         this.activated = activated;
     }
 
+    public String getActivationKey() {
+        return activationKey;
+    }
+
+    public void setActivationKey(String activationKey) {
+        this.activationKey = activationKey;
+    }
+
+    public String getResetKey() {
+        return resetKey;
+    }
+
+    public void setResetKey(String resetKey) {
+        this.resetKey = resetKey;
+    }
+
     public Instant getResetDate() {
         return resetDate;
     }
@@ -118,6 +162,14 @@ public class User implements Serializable {
 
     public void setLangKey(String langKey) {
         this.langKey = langKey;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override
@@ -148,6 +200,7 @@ public class User implements Serializable {
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
+            ", activationKey='" + activationKey + '\'' +
             "}";
     }
 }

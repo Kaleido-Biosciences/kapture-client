@@ -1,6 +1,11 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -9,7 +14,6 @@ import java.util.Objects;
 /**
  * The readout of an assay
  */
-
 public class AssayReadout implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +46,6 @@ public class AssayReadout implements Serializable {
     /**
      * the timestamp of the generation of the result
      */
-
     private ZonedDateTime timestamp;
 
     /**
@@ -60,14 +63,18 @@ public class AssayReadout implements Serializable {
      */
     private Float timePoint;
 
+    /**
+     * The name of the protocol that was used to produce this assay readout
+     */
+    private String protocolName;
+
     @JsonIgnoreProperties("")
     private Sample sample;
 
     @JsonIgnoreProperties("")
     private Analyte analyte;
 
-    private String protocolName;
-
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -180,6 +187,19 @@ public class AssayReadout implements Serializable {
         this.timePoint = timePoint;
     }
 
+    public String getProtocolName() {
+        return protocolName;
+    }
+
+    public AssayReadout protocolName(String protocolName) {
+        this.protocolName = protocolName;
+        return this;
+    }
+
+    public void setProtocolName(String protocolName) {
+        this.protocolName = protocolName;
+    }
+
     public Sample getSample() {
         return sample;
     }
@@ -205,19 +225,7 @@ public class AssayReadout implements Serializable {
     public void setAnalyte(Analyte analyte) {
         this.analyte = analyte;
     }
-
-    public String getProtocolName() {
-        return protocolName;
-    }
-
-    public AssayReadout protocolName(String protocolName){
-        this.protocolName = protocolName;
-        return this;
-    }
-
-    public void setProtocolName(String protocolName) {
-        this.protocolName = protocolName;
-    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -251,7 +259,7 @@ public class AssayReadout implements Serializable {
             ", temperature=" + getTemperature() +
             ", dilutionFactor=" + getDilutionFactor() +
             ", timePoint=" + getTimePoint() +
-            ", protocolName="+getProtocolName() +
+            ", protocolName='" + getProtocolName() + "'" +
             "}";
     }
 }

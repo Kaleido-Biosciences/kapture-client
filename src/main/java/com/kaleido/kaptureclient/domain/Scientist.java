@@ -1,20 +1,18 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Scientists that can be associated with experiments
- * @author Patrick Kyle
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Scientist implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private Long id;
 
     /**
@@ -31,12 +29,13 @@ public class Scientist implements Serializable {
      * The user name of the scientist
      */
     private String userName;
-    
+
     /**
      * Check this box if the scientist is non-Kaleido
      */
     private Boolean isExternal;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -96,6 +95,7 @@ public class Scientist implements Serializable {
     public void setIsExternal(Boolean isExternal) {
         this.isExternal = isExternal;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

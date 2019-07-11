@@ -1,6 +1,9 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kaleido.kaptureclient.domain.enumeration.BottomType;
 import com.kaleido.kaptureclient.domain.enumeration.Material;
 
@@ -12,7 +15,6 @@ import java.util.Objects;
  * Plate Types that can be associated with experiments
  * @author Patrick Kyle
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlateType implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,6 +44,12 @@ public class PlateType implements Serializable {
     @NotNull
     private BottomType bottomType;
 
+    /**
+     * The number of wells in the plate
+     */
+    private Integer numberOfWells;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -102,6 +110,20 @@ public class PlateType implements Serializable {
         this.bottomType = bottomType;
     }
 
+    public Integer getNumberOfWells() {
+        return numberOfWells;
+    }
+
+    public PlateType numberOfWells(Integer numberOfWells) {
+        this.numberOfWells = numberOfWells;
+        return this;
+    }
+
+    public void setNumberOfWells(Integer numberOfWells) {
+        this.numberOfWells = numberOfWells;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -130,6 +152,7 @@ public class PlateType implements Serializable {
             ", material='" + getMaterial() + "'" +
             ", volume=" + getVolume() +
             ", bottomType='" + getBottomType() + "'" +
+            ", numberOfWells=" + getNumberOfWells() +
             "}";
     }
 }

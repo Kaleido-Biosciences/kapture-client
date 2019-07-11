@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient;
 
 import com.kaleido.kaptureclient.authentication.KaptureJWTRequestInterceptor;
@@ -172,6 +176,25 @@ public class KaptureClientConfiguration {
     }
 
     @Bean
+    KaptureClient<BatchLot> batchLotClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getBatchLotEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getBatchLotEndpoint(),
+                restTemplate, retryTemplate, BatchLot.class);
+    }
+
+    @Bean
+    KaptureClient<BatchLotComposition> batchLotCompositionClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getBatchLotCompositionEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getBatchLotCompositionEndpoint(),
+                restTemplate, retryTemplate, BatchLotComposition.class);
+    }
+
+
+    @Bean
     KaptureClient<ChemicalConcept> chemicalConceptClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
         return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getChemicalConceptEndpoint(),
                 kaptureClientProperties.getBase() +
@@ -188,7 +211,16 @@ public class KaptureClientConfiguration {
                         + kaptureClientProperties.getCommunityEndpoint(),
                 restTemplate, retryTemplate, Community.class);
     }
-
+    
+    @Bean
+    KaptureClient<CommunityComposition> communityCompositionClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getCommunityCompositionEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getCommunityCompositionEndpoint(),
+                restTemplate, retryTemplate, CommunityComposition.class);
+    }
+    
     @Bean
     KaptureClient<Concept> conceptClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
         return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getConceptEndpoint(),
@@ -241,6 +273,24 @@ public class KaptureClientConfiguration {
                         kaptureClientProperties.getSearchPathComponent() + "/"
                         + kaptureClientProperties.getMediaEndpoint(),
                 restTemplate, retryTemplate, Media.class);
+    }
+
+    @Bean
+    KaptureClient<MediaLot> MediaLotClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getMediaLotEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getMediaLotEndpoint(),
+                restTemplate, retryTemplate, MediaLot.class);
+    }
+
+    @Bean
+    KaptureClient<MediaLotComposition> mediaLotCompositionClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getMediaLotCompositionEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getMediaLotCompositionEndpoint(),
+                restTemplate, retryTemplate, MediaLotComposition.class);
     }
 
     @Bean
@@ -377,7 +427,16 @@ public class KaptureClientConfiguration {
                         + kaptureClientProperties.getSequencingRunEndpoint(),
                 restTemplate, retryTemplate, SequencingRun.class);
     }
-
+    
+    @Bean
+    KaptureClient<Supplement> supplementClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getSupplementEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getSupplementEndpoint(),
+                restTemplate, retryTemplate, Supplement.class);
+    }
+    
     @Bean
     KaptureClient<User> userClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
         return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getUserEndpoint(),
@@ -396,12 +455,4 @@ public class KaptureClientConfiguration {
                 restTemplate, retryTemplate, Well.class);
     }
 
-    @Bean
-    KaptureClient<SampleTreatment> sampleTreatmentClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
-        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getSampleTreatmentEndpoint(),
-                kaptureClientProperties.getBase() +
-                        kaptureClientProperties.getSearchPathComponent() + "/"
-                        + kaptureClientProperties.getSampleTreatmentEndpoint(),
-                restTemplate, retryTemplate, SampleTreatment.class);
-    }
 }

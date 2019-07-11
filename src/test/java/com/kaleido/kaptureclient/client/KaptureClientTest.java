@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,14 +13,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.reflections.Reflections;
-import org.springframework.aop.framework.Advised;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -32,8 +32,6 @@ import java.util.stream.Stream;
 
 import static java.lang.Integer.MAX_VALUE;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -678,282 +676,6 @@ public class KaptureClientTest {
         server.verify();
     }
 
-    @Test
-    public void saveWithCascade() throws Exception {
-        Scientist scientist = new Scientist()
-                .firstName("FirstName")
-                .lastName("LastName")
-                .userName("UserName")
-                .isExternal(false);
-        ConceptScheme conceptScheme = new ConceptScheme()
-                .label("Concept Scheme Label")
-                .description("Concept Scheme Description")
-                .retired(false);
-        Concept concept = new Concept()
-                .label("Concept Label")
-                .definition("Concept Definition")
-                .retired(false)
-                .scheme(conceptScheme);
-        Experiment experiment = new Experiment().name("G123").scientist(scientist).location(concept);
-        String jsonString = objectMapper.writeValueAsString(experiment);
-
-        server.expect(ExpectedCount.once(),
-                requestTo(kaptureClientProperties.getBase()
-                        + kaptureClientProperties.getExperimentEndpoint() + "?cascadeSave=true"))
-                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
-                .andExpect(method(HttpMethod.POST))
-                .andExpect(content().json(jsonString))
-                .andRespond(withSuccess());
-        experimentKaptureClient.saveWithCascade(experiment);
-        server.verify();
-    }
-
-    @Test
-    public void saveWithCascadeRetryOnce() throws JsonProcessingException {
-        Scientist scientist = new Scientist()
-                .firstName("FirstName")
-                .lastName("LastName")
-                .userName("UserName")
-                .isExternal(false);
-        ConceptScheme conceptScheme = new ConceptScheme()
-                .label("Concept Scheme Label")
-                .description("Concept Scheme Description")
-                .retired(false);
-        Concept concept = new Concept()
-                .label("Concept Label")
-                .definition("Concept Definition")
-                .retired(false)
-                .scheme(conceptScheme);
-        Experiment experiment = new Experiment().name("G123").scientist(scientist).location(concept);
-        String jsonString = objectMapper.writeValueAsString(experiment);
-
-        server.expect(ExpectedCount.once(),
-                requestTo(kaptureClientProperties.getBase()
-                        + kaptureClientProperties.getExperimentEndpoint() + "?cascadeSave=true"))
-                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
-                .andExpect(method(HttpMethod.POST))
-                .andExpect(content().json(jsonString))
-                .andRespond(withStatus(HttpStatus.BAD_GATEWAY));
-
-        server.expect(ExpectedCount.once(),
-                requestTo(kaptureClientProperties.getBase()
-                        + kaptureClientProperties.getExperimentEndpoint() + "?cascadeSave=true"))
-                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
-                .andExpect(method(HttpMethod.POST))
-                .andExpect(content().json(jsonString))
-                .andRespond(withStatus(HttpStatus.OK));
-
-        experimentKaptureClient.saveWithCascade(experiment);
-        server.verify();
-    }
-
-    @Test
-    public void saveWithCascadeRetryTwice() throws JsonProcessingException {
-        Scientist scientist = new Scientist()
-                .firstName("FirstName")
-                .lastName("LastName")
-                .userName("UserName")
-                .isExternal(false);
-        ConceptScheme conceptScheme = new ConceptScheme()
-                .label("Concept Scheme Label")
-                .description("Concept Scheme Description")
-                .retired(false);
-        Concept concept = new Concept()
-                .label("Concept Label")
-                .definition("Concept Definition")
-                .retired(false)
-                .scheme(conceptScheme);
-        Experiment experiment = new Experiment().name("G123").scientist(scientist).location(concept);
-        String jsonString = objectMapper.writeValueAsString(experiment);
-
-        server.expect(ExpectedCount.twice(),
-                requestTo(kaptureClientProperties.getBase()
-                        + kaptureClientProperties.getExperimentEndpoint() + "?cascadeSave=true"))
-                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
-                .andExpect(method(HttpMethod.POST))
-                .andExpect(content().json(jsonString))
-                .andRespond(withStatus(HttpStatus.BAD_GATEWAY));
-
-        server.expect(ExpectedCount.once(),
-                requestTo(kaptureClientProperties.getBase()
-                        + kaptureClientProperties.getExperimentEndpoint() + "?cascadeSave=true"))
-                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
-                .andExpect(method(HttpMethod.POST))
-                .andExpect(content().json(jsonString))
-                .andRespond(withStatus(HttpStatus.OK));
-
-        experimentKaptureClient.saveWithCascade(experiment);
-        server.verify();
-    }
-
-    @Test(expected = KaptureClientHTTPException.class)
-    public void saveWithCascadeShouldNotTryMoreThanThreeTimes() throws JsonProcessingException, KaptureClientHTTPException {
-        Scientist scientist = new Scientist()
-                .firstName("FirstName")
-                .lastName("LastName")
-                .userName("UserName")
-                .isExternal(false);
-        ConceptScheme conceptScheme = new ConceptScheme()
-                .label("Concept Scheme Label")
-                .description("Concept Scheme Description")
-                .retired(false);
-        Concept concept = new Concept()
-                .label("Concept Label")
-                .definition("Concept Definition")
-                .retired(false)
-                .scheme(conceptScheme);
-        Experiment experiment = new Experiment().name("G123").scientist(scientist).location(concept);
-        String jsonString = objectMapper.writeValueAsString(experiment);
-
-        server.expect(ExpectedCount.times(3),
-                requestTo(kaptureClientProperties.getBase()
-                        + kaptureClientProperties.getExperimentEndpoint() + "?cascadeSave=true"))
-                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
-                .andExpect(method(HttpMethod.POST))
-                .andExpect(content().json(jsonString))
-                .andRespond(withStatus(HttpStatus.BAD_GATEWAY));
-
-        experimentKaptureClient.saveWithCascade(experiment);
-        server.verify();
-    }
-
-    @Test(expected = HttpServerErrorException.class)
-    public void saveWithCascadeOtherExceptionShouldNotRetry() throws JsonProcessingException {
-        Scientist scientist = new Scientist()
-                .firstName("FirstName")
-                .lastName("LastName")
-                .userName("UserName")
-                .isExternal(false);
-        ConceptScheme conceptScheme = new ConceptScheme()
-                .label("Concept Scheme Label")
-                .description("Concept Scheme Description")
-                .retired(false);
-        Concept concept = new Concept()
-                .label("Concept Label")
-                .definition("Concept Definition")
-                .retired(false)
-                .scheme(conceptScheme);
-        Experiment experiment = new Experiment().name("G123").scientist(scientist).location(concept);
-        String jsonString = objectMapper.writeValueAsString(experiment);
-
-        server.expect(ExpectedCount.once(),
-                requestTo(kaptureClientProperties.getBase()
-                        + kaptureClientProperties.getExperimentEndpoint() + "?cascadeSave=true"))
-                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
-                .andExpect(method(HttpMethod.POST))
-                .andExpect(content().json(jsonString))
-                .andRespond(withStatus(HttpStatus.INTERNAL_SERVER_ERROR));
-
-        experimentKaptureClient.saveWithCascade(experiment);
-        server.verify();
-    }
-    
-    @Test
-    @SuppressWarnings("unchecked")
-    public void traverse() throws Exception {
-        Scientist scientist = new Scientist().firstName("FirstName").lastName("LastName").userName("UserName");
-        scientist.setId(100001L);
-        ConceptScheme conceptScheme = new ConceptScheme().label("Concept Scheme Label");
-        Concept concept = new Concept().label("Concept Label").scheme(conceptScheme);
-        Experiment experiment = new Experiment().name("G123").scientist(scientist).location(concept);
-
-        //test when update = true
-        Deque stack = new ArrayDeque();
-        experimentKaptureClient.traverse(experiment, stack, true);
-        assertEquals(4, stack.size());
-        assertEquals(ConceptScheme.class.getName(), stack.pop().getClass().getName());
-        assertEquals(Concept.class.getName(), stack.pop().getClass().getName());
-        assertEquals(Scientist.class.getName(), stack.pop().getClass().getName());
-        assertEquals(Experiment.class.getName(), stack.pop().getClass().getName());
-
-        //test when update = false
-        stack = new ArrayDeque();
-        experimentKaptureClient.traverse(experiment, stack, false);
-        assertEquals(3, stack.size());
-        assertEquals(ConceptScheme.class.getName(), stack.pop().getClass().getName());
-        assertEquals(Concept.class.getName(), stack.pop().getClass().getName());
-        assertEquals(Experiment.class.getName(), stack.pop().getClass().getName());
-    }
-
-    @Test
-    @SuppressWarnings("unchecked")
-    public void traverseAssayTypesSet() throws Exception {
-        // stub non-persisted entities and its persisted version
-        ConceptScheme conceptScheme = new ConceptScheme().label("Concept Scheme Label");
-        conceptScheme.setId(100001L);
-        Concept concept = new Concept().label("Concept Label 1").scheme(conceptScheme);
-        Concept concept2 = new Concept().label("Concept Label 2").scheme(conceptScheme);
-        Experiment experiment = new Experiment().name("G123").addAssayTypes(concept).addAssayTypes(concept2);
-
-        //test when update = true
-        Deque stack = new ArrayDeque();
-        experimentKaptureClient.traverse(experiment, stack, false);
-        assertEquals(3, stack.size());
-        assertEquals(Concept.class.getName(), stack.pop().getClass().getName());
-        assertEquals(Concept.class.getName(), stack.pop().getClass().getName());
-        assertEquals(Experiment.class.getName(), stack.pop().getClass().getName());
-    }
-
-    @Test
-    @SuppressWarnings("unchecked")
-    public void persistEntities() throws Exception {
-        // stub non-persisted entities and its persisted version
-        Scientist scientist = new Scientist().firstName("FirstName").lastName("LastName").userName("UserName");
-        scientist.setId(100001L);
-        ConceptScheme conceptScheme = new ConceptScheme().label("Concept Scheme Label");
-        ConceptScheme conceptScheme2 = new ConceptScheme().label("Concept Scheme Label");
-        conceptScheme2.setId(100002L);
-        Concept concept = new Concept().label("Concept Label").scheme(conceptScheme);
-        Concept concept2 = new Concept().label("Concept Label").scheme(conceptScheme);
-        concept2.setId(100003L);
-        Experiment experiment = new Experiment().name("G123").scientist(scientist).location(concept);
-        Experiment experiment2 = new Experiment().name("G123").scientist(scientist).location(concept);
-        experiment2.setId(100004L);
-
-        // mock KaptureClient for each entity in the test case
-        KaptureClient<Experiment> experimentClient = (KaptureClient<Experiment>) mock(KaptureClient.class);
-        KaptureClient<Concept> conceptClient = (KaptureClient<Concept>) mock(KaptureClient.class);
-        KaptureClient<ConceptScheme> conceptSchemeClient = (KaptureClient<ConceptScheme>) mock(KaptureClient.class);
-        KaptureClient<Scientist> scientistClient = (KaptureClient<Scientist>) mock(KaptureClient.class);
-
-        // experimentKaptureClient.kaptureClientConfiguration.getClient() should return the mocked KaptureClient above
-        // We are not testing the KaptureClient<>.save() function, so we mock all the returned result.
-        if (experimentKaptureClient instanceof Advised) {
-            experimentKaptureClient = (KaptureClient<Experiment>) ((Advised) experimentKaptureClient).getTargetSource().getTarget();
-        }
-        experimentKaptureClient.context = mock(ApplicationContext.class);
-        when(experimentKaptureClient.getClient(Experiment.class)).thenReturn(experimentClient);
-        when(experimentKaptureClient.getClient(Concept.class)).thenReturn(conceptClient);
-        when(experimentKaptureClient.getClient(ConceptScheme.class)).thenReturn(conceptSchemeClient);
-        when(experimentKaptureClient.getClient(Scientist.class)).thenReturn(scientistClient);
-
-        when(conceptSchemeClient.save(conceptScheme)).thenReturn(new ResponseEntity<>(conceptScheme2, HttpStatus.OK));
-        when(conceptClient.save(concept)).thenReturn(new ResponseEntity<>(concept2, HttpStatus.OK));
-        when(scientistClient.save(scientist)).thenReturn(new ResponseEntity<>(scientist, HttpStatus.OK));
-        when(experimentClient.save(experiment)).thenReturn(new ResponseEntity<>(experiment2, HttpStatus.OK));
-
-        //test when update = true
-        Deque stack = new ArrayDeque();
-        stack.push(experiment);
-        stack.push(scientist);
-        stack.push(concept);
-        stack.push(conceptScheme);
-        // use experimentKaptureClient to kick off test
-        ResponseEntity<Experiment> response = experimentKaptureClient.persistEntities(stack);
-        if (response.getBody() != null) {
-            long experimentId = response.getBody().getId();
-            long locationId = response.getBody().getLocation().getId();
-            long conceptSchemeId = response.getBody().getLocation().getScheme().getId();
-            long scientistId = response.getBody().getScientist().getId();
-            assertEquals(200, response.getStatusCodeValue());
-            assertEquals(100001L, scientistId);
-            assertEquals(100002L, conceptSchemeId);
-            assertEquals(100003L, locationId);
-            assertEquals(100004L, experimentId);
-        } else {
-            fail("response.getBody() is null");
-        }
-    }
 
     @Test
     public void delete() {
@@ -1110,10 +832,10 @@ public class KaptureClientTest {
 
     @Test
     public void findByFieldsEqualUri() {
-        String uriString = kaptureClientProperties.getBase() + kaptureClientProperties.getBatchEndpoint() + "?foo.equals=baa&foz.equals=baz&page=0&size=20";
+        String uriString = kaptureClientProperties.getBase() + kaptureClientProperties.getBatchEndpoint() + "?foo.equals=baa&foz.equals=baz%20%2B%20boz&page=0&size=20";
         Map<String, String> params = new LinkedHashMap<>();
         params.put("foo", "baa");
-        params.put("foz", "baz");
+        params.put("foz", "baz + boz");
         URI uri = kaptureClient.findByFieldsEqualUri(params, 0, 20);
         assertEquals(uriString, uri.toString());
     }
@@ -1174,16 +896,5 @@ public class KaptureClientTest {
 
         sampleKaptureClient.findByFieldsEqual(params, 10, 50);
         server.verify();
-    }
-
-    @Test
-    @SuppressWarnings("unchecked")
-    public void getClient() {
-        Reflections reflections = new Reflections("com.kaleido.kaptureclient.domain");
-        Set<Class<? extends Object>> allClasses =
-                reflections.getSubTypesOf(Object.class);
-        for (Class clazz : allClasses) {
-            assertNotNull(experimentKaptureClient.getClient(clazz));
-        }
     }
 }
