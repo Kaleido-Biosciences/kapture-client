@@ -1,7 +1,10 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -40,20 +43,42 @@ public class Sample implements Serializable {
 
     @NotNull
     @JsonIgnoreProperties("")
+    @Deprecated
     private Media media;
 
     @NotNull
     @JsonIgnoreProperties("")
+    @Deprecated
     private Community community;
 
     @NotNull
     @JsonIgnoreProperties("")
+    @Deprecated
     private Batch batch;
 
-    private Set<SampleTreatment> treatments = new HashSet<>();
+    /**
+     * The experiment that the sample was prepared for
+     */
+    @JsonIgnoreProperties("")
+    private Experiment experiment;
+
+    /**
+     * The Community Composition within a Sample
+     */
+    private Set<CommunityComposition> communityCompositions = new HashSet<>();
+
+    /**
+     * The supplement added to a sample with media
+     */
+    private Set<Supplement> supplements = new HashSet<>();
+
+    private Set<BatchLotComposition> batchLotCompositions = new HashSet<>();
+
+    private Set<MediaLotComposition> mediaLotCompositions = new HashSet<>();
 
     private Set<Well> wells = new HashSet<>();
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -153,27 +178,109 @@ public class Sample implements Serializable {
         this.batch = batch;
     }
 
-    public Set<SampleTreatment> getTreatments() {
-        return treatments;
+    public Experiment getExperiment() {
+        return experiment;
     }
 
-    public Sample treatments(Set<SampleTreatment> sampleTreatments) {
-        this.treatments = sampleTreatments;
+    public Sample experiment(Experiment experiment) {
+        this.experiment = experiment;
         return this;
     }
 
-    public Sample addTreatments(SampleTreatment sampleTreatment) {
-        this.treatments.add(sampleTreatment);
+    public void setExperiment(Experiment experiment) {
+        this.experiment = experiment;
+    }
+
+    public Set<CommunityComposition> getCommunityCompositions() {
+        return communityCompositions;
+    }
+
+    public Sample communityCompositions(Set<CommunityComposition> communityCompositions) {
+        this.communityCompositions = communityCompositions;
         return this;
     }
 
-    public Sample removeTreatments(SampleTreatment sampleTreatment) {
-        this.treatments.remove(sampleTreatment);
+    public Sample addCommunityComposition(CommunityComposition communityComposition) {
+        this.communityCompositions.add(communityComposition);
         return this;
     }
 
-    public void setTreatments(Set<SampleTreatment> sampleTreatments) {
-        this.treatments = sampleTreatments;
+    public Sample removeCommunityComposition(CommunityComposition communityComposition) {
+        this.communityCompositions.remove(communityComposition);
+        return this;
+    }
+
+    public void setCommunityCompositions(Set<CommunityComposition> communityCompositions) {
+        this.communityCompositions = communityCompositions;
+    }
+
+    public Set<Supplement> getSupplements() {
+        return supplements;
+    }
+
+    public Sample supplements(Set<Supplement> supplements) {
+        this.supplements = supplements;
+        return this;
+    }
+
+    public Sample addSupplements(Supplement supplement) {
+        this.supplements.add(supplement);
+        return this;
+    }
+
+    public Sample removeSupplements(Supplement supplement) {
+        this.supplements.remove(supplement);
+        return this;
+    }
+
+    public void setSupplements(Set<Supplement> supplements) {
+        this.supplements = supplements;
+    }
+
+    public Set<BatchLotComposition> getBatchLotCompositions() {
+        return batchLotCompositions;
+    }
+
+    public Sample batchLotCompositions(Set<BatchLotComposition> batchLotCompositions) {
+        this.batchLotCompositions = batchLotCompositions;
+        return this;
+    }
+
+    public Sample addBatchLotCompositions(BatchLotComposition batchLotComposition) {
+        this.batchLotCompositions.add(batchLotComposition);
+        return this;
+    }
+
+    public Sample removeBatchLotCompositions(BatchLotComposition batchLotComposition) {
+        this.batchLotCompositions.remove(batchLotComposition);
+        return this;
+    }
+
+    public void setBatchLotCompositions(Set<BatchLotComposition> batchLotCompositions) {
+        this.batchLotCompositions = batchLotCompositions;
+    }
+
+    public Set<MediaLotComposition> getMediaLotCompositions() {
+        return mediaLotCompositions;
+    }
+
+    public Sample mediaLotCompositions(Set<MediaLotComposition> mediaLotCompositions) {
+        this.mediaLotCompositions = mediaLotCompositions;
+        return this;
+    }
+
+    public Sample addMediaLotCompositions(MediaLotComposition mediaLotComposition) {
+        this.mediaLotCompositions.add(mediaLotComposition);
+        return this;
+    }
+
+    public Sample removeMediaLotCompositions(MediaLotComposition mediaLotComposition) {
+        this.mediaLotCompositions.remove(mediaLotComposition);
+        return this;
+    }
+
+    public void setMediaLotCompositions(Set<MediaLotComposition> mediaLotCompositions) {
+        this.mediaLotCompositions = mediaLotCompositions;
     }
 
     public Set<Well> getWells() {
@@ -200,6 +307,7 @@ public class Sample implements Serializable {
     public void setWells(Set<Well> wells) {
         this.wells = wells;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

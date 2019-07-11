@@ -6,30 +6,38 @@ package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A sequencing run
+ * One batch lot composition is associated with one batch lot
  */
-public class SequencingRun implements Serializable {
+public class BatchLotComposition implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
     /**
-     * name of the sequencing run
+     * The name of a batch lot composition
      */
     @NotNull
     private String name;
 
     /**
-     * File associated with the sequencing run
+     * A percentage of a batch lot in a composition
      */
+    @NotNull
+    @DecimalMin(value = "0")
+    @DecimalMax(value = "100")
+    private Double percent;
+
+    @NotNull
     @JsonIgnoreProperties("")
-    private ImportedFile importedFile;
+    private BatchLot batchLot;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -44,7 +52,7 @@ public class SequencingRun implements Serializable {
         return name;
     }
 
-    public SequencingRun name(String name) {
+    public BatchLotComposition name(String name) {
         this.name = name;
         return this;
     }
@@ -53,17 +61,30 @@ public class SequencingRun implements Serializable {
         this.name = name;
     }
 
-    public ImportedFile getImportedFile() {
-        return importedFile;
+    public Double getPercent() {
+        return percent;
     }
 
-    public SequencingRun importedFile(ImportedFile importedFile) {
-        this.importedFile = importedFile;
+    public BatchLotComposition percent(Double percent) {
+        this.percent = percent;
         return this;
     }
 
-    public void setImportedFile(ImportedFile importedFile) {
-        this.importedFile = importedFile;
+    public void setPercent(Double percent) {
+        this.percent = percent;
+    }
+
+    public BatchLot getBatchLot() {
+        return batchLot;
+    }
+
+    public BatchLotComposition batchLot(BatchLot batchLot) {
+        this.batchLot = batchLot;
+        return this;
+    }
+
+    public void setBatchLot(BatchLot batchLot) {
+        this.batchLot = batchLot;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -75,11 +96,11 @@ public class SequencingRun implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SequencingRun sequencingRun = (SequencingRun) o;
-        if (sequencingRun.getId() == null || getId() == null) {
+        BatchLotComposition batchLotComposition = (BatchLotComposition) o;
+        if (batchLotComposition.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), sequencingRun.getId());
+        return Objects.equals(getId(), batchLotComposition.getId());
     }
 
     @Override
@@ -89,9 +110,10 @@ public class SequencingRun implements Serializable {
 
     @Override
     public String toString() {
-        return "SequencingRun{" +
+        return "BatchLotComposition{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", percent=" + getPercent() +
             "}";
     }
 }

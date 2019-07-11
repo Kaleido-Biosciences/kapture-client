@@ -1,6 +1,9 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kaleido.kaptureclient.domain.enumeration.FileImportStatus;
 
 import javax.validation.constraints.NotNull;
@@ -11,7 +14,6 @@ import java.util.Objects;
 /**
  * A file that has been imported into Kapture
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ImportedFile implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +54,7 @@ public class ImportedFile implements Serializable {
      */
     private ZonedDateTime importTime;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -137,6 +140,7 @@ public class ImportedFile implements Serializable {
     public void setImportTime(ZonedDateTime importTime) {
         this.importTime = importTime;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

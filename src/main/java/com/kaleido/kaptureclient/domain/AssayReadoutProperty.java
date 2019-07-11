@@ -1,7 +1,10 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -10,11 +13,9 @@ import java.util.Objects;
 /**
  * A key value for properties
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class AssayReadoutProperty implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private Long id;
 
     /**

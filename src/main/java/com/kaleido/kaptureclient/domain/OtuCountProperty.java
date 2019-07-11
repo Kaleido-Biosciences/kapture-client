@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
+ */
+
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,7 +14,6 @@ import java.util.Objects;
 /**
  * The properties of a OTU, called sequencing properties in screen-db
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class OtuCountProperty implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +49,7 @@ public class OtuCountProperty implements Serializable {
     @JsonIgnoreProperties("")
     private ObservedTaxonomicUnitCount observedTaxonomicUnitCount;
 
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -131,6 +135,7 @@ public class OtuCountProperty implements Serializable {
     public void setObservedTaxonomicUnitCount(ObservedTaxonomicUnitCount observedTaxonomicUnitCount) {
         this.observedTaxonomicUnitCount = observedTaxonomicUnitCount;
     }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
