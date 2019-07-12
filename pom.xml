@@ -60,11 +60,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshots</id>
-            <url>http://docker.kaleidobio.com:8011/repository/maven-snapshots/</url>
+            <url>https://nexus.apps.kaleidobio.com/repository/maven-snapshots-s3/</url>
         </snapshotRepository>
         <repository>
             <id>nexus-releases</id>
-            <url>http://docker.kaleidobio.com:8011/repository/maven-releases/</url>
+            <url>https://nexus.apps.kaleidobio.com/repository/maven-releases-s3/</url>
         </repository>
     </distributionManagement>
 
