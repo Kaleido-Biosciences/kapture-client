@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -20,14 +21,14 @@ public class Supplement implements Serializable {
     private Long id;
 
     /**
-     * The concentration of the supplement reagent in millimoles
+     * The Source of the supplement (e.g. vendor, physical source, etc...)
      */
-    private Double concentration;
+    private String source;
 
     /**
-     * The time in minutes from 0:00am when supplement is added with media
+     * The time that the supplement was registered
      */
-    private Double treatmentTime;
+    private ZonedDateTime registrationDate;
 
     /**
      * Properties that describe a Supplement instance
@@ -36,9 +37,8 @@ public class Supplement implements Serializable {
     @JsonIgnoreProperties("")
     private Concept name;
 
-    @NotNull
     @JsonIgnoreProperties("")
-    private Concept concentrationUnit;
+    private Concept classification;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -49,30 +49,30 @@ public class Supplement implements Serializable {
         this.id = id;
     }
 
-    public Double getConcentration() {
-        return concentration;
+    public String getSource() {
+        return source;
     }
 
-    public Supplement concentration(Double concentration) {
-        this.concentration = concentration;
+    public Supplement source(String source) {
+        this.source = source;
         return this;
     }
 
-    public void setConcentration(Double concentration) {
-        this.concentration = concentration;
+    public void setSource(String source) {
+        this.source = source;
     }
 
-    public Double getTreatmentTime() {
-        return treatmentTime;
+    public ZonedDateTime getRegistrationDate() {
+        return registrationDate;
     }
 
-    public Supplement treatmentTime(Double treatmentTime) {
-        this.treatmentTime = treatmentTime;
+    public Supplement registrationDate(ZonedDateTime registrationDate) {
+        this.registrationDate = registrationDate;
         return this;
     }
 
-    public void setTreatmentTime(Double treatmentTime) {
-        this.treatmentTime = treatmentTime;
+    public void setRegistrationDate(ZonedDateTime registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public Concept getName() {
@@ -88,17 +88,17 @@ public class Supplement implements Serializable {
         this.name = concept;
     }
 
-    public Concept getConcentrationUnit() {
-        return concentrationUnit;
+    public Concept getClassification() {
+        return classification;
     }
 
-    public Supplement concentrationUnit(Concept concept) {
-        this.concentrationUnit = concept;
+    public Supplement classification(Concept concept) {
+        this.classification = concept;
         return this;
     }
 
-    public void setConcentrationUnit(Concept concept) {
-        this.concentrationUnit = concept;
+    public void setClassification(Concept concept) {
+        this.classification = concept;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -125,9 +125,9 @@ public class Supplement implements Serializable {
     @Override
     public String toString() {
         return "Supplement{" +
-            "id=" + getId() +
-            ", concentration=" + getConcentration() +
-            ", treatmentTime=" + getTreatmentTime() +
-            "}";
+                "id=" + getId() +
+                ", source='" + getSource() + "'" +
+                ", registrationDate='" + getRegistrationDate() + "'" +
+                "}";
     }
 }

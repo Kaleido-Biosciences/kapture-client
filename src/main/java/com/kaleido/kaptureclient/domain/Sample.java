@@ -70,7 +70,7 @@ public class Sample implements Serializable {
     /**
      * The supplement added to a sample with media
      */
-    private Set<Supplement> supplements = new HashSet<>();
+    private Set<SupplementMetadata> supplementsMetadata = new HashSet<>();
 
     private Set<BatchLotComposition> batchLotCompositions = new HashSet<>();
 
@@ -214,27 +214,27 @@ public class Sample implements Serializable {
         this.communityCompositions = communityCompositions;
     }
 
-    public Set<Supplement> getSupplements() {
-        return supplements;
+    public Set<SupplementMetadata> getSupplementsMetadata() {
+        return supplementsMetadata;
     }
 
-    public Sample supplements(Set<Supplement> supplements) {
-        this.supplements = supplements;
+    public Sample supplementsMetadata(Set<SupplementMetadata> supplementsMetadata) {
+        this.supplementsMetadata = supplementsMetadata;
         return this;
     }
 
-    public Sample addSupplements(Supplement supplement) {
-        this.supplements.add(supplement);
+    public Sample addSupplementsMetadata(SupplementMetadata supplementMetadata) {
+        this.supplementsMetadata.add(supplementMetadata);
         return this;
     }
 
-    public Sample removeSupplements(Supplement supplement) {
-        this.supplements.remove(supplement);
+    public Sample removeSupplementsMetadata(SupplementMetadata supplementMetadata) {
+        this.supplementsMetadata.remove(supplementMetadata);
         return this;
     }
 
-    public void setSupplements(Set<Supplement> supplements) {
-        this.supplements = supplements;
+    public void setSupplementsMetadata(Set<SupplementMetadata> supplementsMetadata) {
+        this.supplementsMetadata = supplementsMetadata;
     }
 
     public Set<BatchLotComposition> getBatchLotCompositions() {

@@ -10,6 +10,7 @@ import com.kaleido.kaptureclient.domain.enumeration.GeneralQuestion;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -70,11 +71,6 @@ public class Community implements Serializable {
     private GeneralQuestion knownAntibioticResistance;
 
     /**
-     * Known antibiotics to which species is resistant
-     */
-    private String antibioticList;
-
-    /**
      * Strain with plasmid
      */
     private String plasmid;
@@ -88,6 +84,11 @@ public class Community implements Serializable {
      * LIMS registration record
      */
     private String dataRecordName;
+
+    /**
+     * The time that the community was registered
+     */
+    private ZonedDateTime registrationDate;
 
     /**
      * The sample id in the BSI system
@@ -107,7 +108,6 @@ public class Community implements Serializable {
     /**
      * The scientist associated with the community/strain
      */
-    @JsonIgnoreProperties("")
     private Scientist scientist;
 
     /**
@@ -151,6 +151,11 @@ public class Community implements Serializable {
      */
     @JsonIgnoreProperties("")
     private Concept growthRequirement;
+
+    /**
+     * Known antibiotics to which species is resistant
+     */
+    private Set<Concept> antibioticLists = new HashSet<>();
 
     /**
      * The Community Composition of a community itself
@@ -283,19 +288,6 @@ public class Community implements Serializable {
         this.knownAntibioticResistance = knownAntibioticResistance;
     }
 
-    public String getAntibioticList() {
-        return antibioticList;
-    }
-
-    public Community antibioticList(String antibioticList) {
-        this.antibioticList = antibioticList;
-        return this;
-    }
-
-    public void setAntibioticList(String antibioticList) {
-        this.antibioticList = antibioticList;
-    }
-
     public String getPlasmid() {
         return plasmid;
     }
@@ -333,6 +325,19 @@ public class Community implements Serializable {
 
     public void setDataRecordName(String dataRecordName) {
         this.dataRecordName = dataRecordName;
+    }
+
+    public ZonedDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public Community registrationDate(ZonedDateTime registrationDate) {
+        this.registrationDate = registrationDate;
+        return this;
+    }
+
+    public void setRegistrationDate(ZonedDateTime registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public String getBsiId() {
@@ -478,6 +483,29 @@ public class Community implements Serializable {
         this.growthRequirement = concept;
     }
 
+    public Set<Concept> getAntibioticLists() {
+        return antibioticLists;
+    }
+
+    public Community antibioticLists(Set<Concept> concepts) {
+        this.antibioticLists = concepts;
+        return this;
+    }
+
+    public Community addAntibioticList(Concept concept) {
+        this.antibioticLists.add(concept);
+        return this;
+    }
+
+    public Community removeAntibioticList(Concept concept) {
+        this.antibioticLists.remove(concept);
+        return this;
+    }
+
+    public void setAntibioticLists(Set<Concept> concepts) {
+        this.antibioticLists = concepts;
+    }
+
     public Set<CommunityComposition> getCommunityCompositions() {
         return communityCompositions;
     }
@@ -525,23 +553,24 @@ public class Community implements Serializable {
     @Override
     public String toString() {
         return "Community{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", communityType='" + getCommunityType() + "'" +
-            ", barcode='" + getBarcode() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", alias='" + getAlias() + "'" +
-            ", species='" + getSpecies() + "'" +
-            ", source='" + getSource() + "'" +
-            ", typed='" + getTyped() + "'" +
-            ", knownAntibioticResistance='" + getKnownAntibioticResistance() + "'" +
-            ", antibioticList='" + getAntibioticList() + "'" +
-            ", plasmid='" + getPlasmid() + "'" +
-            ", starterStocksMade='" + getStarterStocksMade() + "'" +
-            ", dataRecordName='" + getDataRecordName() + "'" +
-            ", bsiId='" + getBsiId() + "'" +
-            ", bsiName='" + getBsiName() + "'" +
-            ", notes='" + getNotes() + "'" +
-            "}";
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", communityType='" + getCommunityType() + "'" +
+                ", barcode='" + getBarcode() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", alias='" + getAlias() + "'" +
+                ", species='" + getSpecies() + "'" +
+                ", source='" + getSource() + "'" +
+                ", typed='" + getTyped() + "'" +
+                ", knownAntibioticResistance='" + getKnownAntibioticResistance() + "'" +
+                ", plasmid='" + getPlasmid() + "'" +
+                ", starterStocksMade='" + getStarterStocksMade() + "'" +
+                ", dataRecordName='" + getDataRecordName() + "'" +
+                ", registrationDate='" + getRegistrationDate() + "'" +
+                ", bsiId='" + getBsiId() + "'" +
+                ", bsiName='" + getBsiName() + "'" +
+                ", notes='" + getNotes() + "'" +
+                "}";
     }
 }
+
