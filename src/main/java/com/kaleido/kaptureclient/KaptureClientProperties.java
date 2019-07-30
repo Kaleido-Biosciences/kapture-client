@@ -65,6 +65,7 @@ public class KaptureClientProperties {
     private String scientistEndpoint = "scientists";
     private String sequencingRunEndpoint = "sequencing-runs";
     private String supplementEndpoint = "supplements";
+    private String supplementMetadataEndpoint = "supplement-metadata";
     private String userEndpoint = "users";
     private String wellEndpoint = "wells";
 
@@ -471,5 +472,13 @@ public class KaptureClientProperties {
 
     public void setBatchLotCompositionEndpoint(String batchLotCompositionEndpoint) {
         this.batchLotCompositionEndpoint = batchLotCompositionEndpoint;
+    }
+
+    public String getSupplementMetadataEndpoint() {
+        return supplementMetadataEndpoint;
+    }
+
+    public void setSupplementMetadataEndpoint(String supplementMetadataEndpoint) {
+        this.supplementMetadataEndpoint = supplementMetadataEndpoint;
     }
 }
