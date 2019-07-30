@@ -427,7 +427,7 @@ public class KaptureClientConfiguration {
                         + kaptureClientProperties.getSequencingRunEndpoint(),
                 restTemplate, retryTemplate, SequencingRun.class);
     }
-    
+
     @Bean
     KaptureClient<Supplement> supplementClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
         return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getSupplementEndpoint(),
@@ -435,6 +435,15 @@ public class KaptureClientConfiguration {
                         kaptureClientProperties.getSearchPathComponent() + "/"
                         + kaptureClientProperties.getSupplementEndpoint(),
                 restTemplate, retryTemplate, Supplement.class);
+    }
+
+    @Bean
+    KaptureClient<SupplementMetadata> supplementMetadataClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getSupplementMetadataEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getSupplementMetadataEndpoint(),
+                restTemplate, retryTemplate, SupplementMetadata.class);
     }
     
     @Bean
