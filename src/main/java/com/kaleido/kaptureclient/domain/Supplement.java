@@ -26,6 +26,11 @@ public class Supplement implements Serializable {
     private String source;
 
     /**
+     * The Description of the supplement
+     */
+    private String description;
+
+    /**
      * The time that the supplement was registered
      */
     private ZonedDateTime registrationDate;
@@ -60,6 +65,20 @@ public class Supplement implements Serializable {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Supplement description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ZonedDateTime getRegistrationDate() {
@@ -127,6 +146,7 @@ public class Supplement implements Serializable {
         return "Supplement{" +
                 "id=" + getId() +
                 ", source='" + getSource() + "'" +
+                ", description='" + getDescription() + "'" +
                 ", registrationDate='" + getRegistrationDate() + "'" +
                 "}";
     }
