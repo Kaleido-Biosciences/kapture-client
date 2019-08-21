@@ -126,7 +126,7 @@ public class Community implements Serializable {
      * The status of the strain/community
      */
     @JsonIgnoreProperties("")
-    private Concept status;
+    private String status;
 
     /**
      * The growth medium of the strain
@@ -138,19 +138,19 @@ public class Community implements Serializable {
      * The Pathogen of the strain/community
      */
     @JsonIgnoreProperties("")
-    private Concept pathogen;
+    private String pathogen;
 
     /**
      * The Gram Stain of the strain/community
      */
     @JsonIgnoreProperties("")
-    private Concept gramStain;
+    private String gramStain;
 
     /**
      * The Growth Requirement of the strain/community
      */
     @JsonIgnoreProperties("")
-    private Concept growthRequirement;
+    private String growthRequirement;
 
     /**
      * Known antibiotics to which species is resistant
@@ -418,17 +418,17 @@ public class Community implements Serializable {
         this.relatedCommunity = community;
     }
 
-    public Concept getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public Community status(Concept concept) {
-        this.status = concept;
+    public Community status(String status) {
+        this.status = status;
         return this;
     }
 
-    public void setStatus(Concept concept) {
-        this.status = concept;
+    public void setStatus(String concept) {
+        this.status = status;
     }
 
     public Media getGrowthMedium() {
@@ -444,43 +444,43 @@ public class Community implements Serializable {
         this.growthMedium = media;
     }
 
-    public Concept getPathogen() {
+    public String getPathogen() {
         return pathogen;
     }
 
-    public Community pathogen(Concept concept) {
-        this.pathogen = concept;
+    public Community pathogen(String pathogen) {
+        this.pathogen = pathogen;
         return this;
     }
 
-    public void setPathogen(Concept concept) {
-        this.pathogen = concept;
+    public void setPathogen(String pathogen) {
+        this.pathogen = pathogen;
     }
 
-    public Concept getGramStain() {
+    public String getGramStain() {
         return gramStain;
     }
 
-    public Community gramStain(Concept concept) {
-        this.gramStain = concept;
+    public Community gramStain(String gramStain) {
+        this.gramStain = gramStain;
         return this;
     }
 
-    public void setGramStain(Concept concept) {
-        this.gramStain = concept;
+    public void setGramStain(String gramStain) {
+        this.gramStain = gramStain;
     }
 
-    public Concept getGrowthRequirement() {
+    public String getGrowthRequirement() {
         return growthRequirement;
     }
 
-    public Community growthRequirement(Concept concept) {
-        this.growthRequirement = concept;
+    public Community growthRequirement(String growthRequirement) {
+        this.growthRequirement = growthRequirement;
         return this;
     }
 
-    public void setGrowthRequirement(Concept concept) {
-        this.growthRequirement = concept;
+    public void setGrowthRequirement(String growthRequirement) {
+        this.growthRequirement = growthRequirement;
     }
 
     public Set<Concept> getAntibioticLists() {
