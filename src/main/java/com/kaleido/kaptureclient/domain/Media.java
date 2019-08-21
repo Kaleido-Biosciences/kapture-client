@@ -6,6 +6,7 @@ package com.kaleido.kaptureclient.domain;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -23,7 +24,30 @@ public class Media implements Serializable {
     @NotNull
     private String name;
 
+    /**
+     * The description of the Media
+     */
     private String description;
+
+    /**
+     * Media ph level
+     */
+    private Float ph;
+
+    /**
+     * When the media was created
+     */
+    private ZonedDateTime dateCreated;
+
+    /**
+     * This is the media that the media recipe is derived from or is based on
+     */
+    private Media baseMedia;
+
+    /**
+     * The scientist associated with the experiment
+     */
+    private Scientist scientist;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -59,6 +83,59 @@ public class Media implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Float getPh() {
+        return ph;
+    }
+
+    public Media ph(Float ph) {
+        this.ph = ph;
+        return this;
+    }
+
+    public void setPh(Float ph) {
+        this.ph = ph;
+    }
+
+    public ZonedDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public Media dateCreated(ZonedDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+        return this;
+    }
+
+    public void setDateCreated(ZonedDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Media getBaseMedia() {
+        return baseMedia;
+    }
+
+    public Media baseMedia(Media media) {
+        this.baseMedia = media;
+        return this;
+    }
+
+    public void setBaseMedia(Media media) {
+        this.baseMedia = media;
+    }
+
+    public Scientist getScientist() {
+        return scientist;
+    }
+
+    public Media scientist(Scientist scientist) {
+        this.scientist = scientist;
+        return this;
+    }
+
+    public void setScientist(Scientist scientist) {
+        this.scientist = scientist;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -87,6 +164,8 @@ public class Media implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", ph=" + getPh() +
+            ", dateCreated='" + getDateCreated() + "'" +
             "}";
     }
 }

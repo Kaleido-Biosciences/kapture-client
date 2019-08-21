@@ -59,6 +59,21 @@ public class Experiment implements Serializable {
     private String goals;
 
     /**
+     * The location of the experiment
+     */
+    @NotNull
+    private String location;
+
+    /**
+     * Which chamber was used
+     */
+    private String chamber;
+
+    /**
+     * The Status of the experiment
+     */
+    private String status;
+    /**
      * The number of plates
      */
     @Min(value = 0)
@@ -84,25 +99,6 @@ public class Experiment implements Serializable {
      */
     @JsonIgnoreProperties("")
     private Scientist scientist;
-
-    /**
-     * The type of endpoint
-     */
-    @NotNull
-    @JsonIgnoreProperties("")
-    private Concept location;
-
-    /**
-     * Which chamber was used
-     */
-    @JsonIgnoreProperties("")
-    private Concept chamber;
-
-    /**
-     * The Status of the experiment
-     */
-    @JsonIgnoreProperties("")
-    private Concept status;
 
     /**
      * The processing method of the experiment
@@ -209,6 +205,45 @@ public class Experiment implements Serializable {
         this.goals = goals;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public Experiment location(String location) {
+        this.location = location;
+        return this;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getChamber() {
+        return chamber;
+    }
+
+    public Experiment chamber(String chamber) {
+        this.chamber = chamber;
+        return this;
+    }
+
+    public void setChamber(String chamber) {
+        this.chamber = chamber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Experiment status(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Integer getNumberOfPlates() {
         return numberOfPlates;
     }
@@ -272,45 +307,6 @@ public class Experiment implements Serializable {
 
     public void setScientist(Scientist scientist) {
         this.scientist = scientist;
-    }
-
-    public Concept getLocation() {
-        return location;
-    }
-
-    public Experiment location(Concept concept) {
-        this.location = concept;
-        return this;
-    }
-
-    public void setLocation(Concept concept) {
-        this.location = concept;
-    }
-
-    public Concept getChamber() {
-        return chamber;
-    }
-
-    public Experiment chamber(Concept concept) {
-        this.chamber = concept;
-        return this;
-    }
-
-    public void setChamber(Concept concept) {
-        this.chamber = concept;
-    }
-
-    public Concept getStatus() {
-        return status;
-    }
-
-    public Experiment status(Concept concept) {
-        this.status = concept;
-        return this;
-    }
-
-    public void setStatus(Concept concept) {
-        this.status = concept;
     }
 
     public Concept getProcessingMethod() {
@@ -408,6 +404,9 @@ public class Experiment implements Serializable {
             ", startDate='" + getStartDate() + "'" +
             ", description='" + getDescription() + "'" +
             ", goals='" + getGoals() + "'" +
+            ", location='" + getLocation() + "'" +
+            ", chamber='" + getChamber() + "'" +
+            ", status='" + getStatus() + "'" +
             ", numberOfPlates=" + getNumberOfPlates() +
             ", slurryPercent=" + getSlurryPercent() +
             ", notes='" + getNotes() + "'" +
@@ -415,3 +414,4 @@ public class Experiment implements Serializable {
             "}";
     }
 }
+
