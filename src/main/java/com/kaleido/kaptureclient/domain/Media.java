@@ -24,14 +24,29 @@ public class Media implements Serializable {
     @NotNull
     private String name;
 
+    /**
+     * The description of the Media
+     */
     private String description;
 
+    /**
+     * Media ph level
+     */
     private Float ph;
 
+    /**
+     * When the media was created
+     */
     private ZonedDateTime dateCreated;
 
+    /**
+     * This is the media that the media recipe is derived from or is based on
+     */
     private Media baseMedia;
 
+    /**
+     * The scientist associated with the experiment
+     */
     private Scientist scientist;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
