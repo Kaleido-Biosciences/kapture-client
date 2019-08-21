@@ -404,6 +404,9 @@ public class Experiment implements Serializable {
             ", startDate='" + getStartDate() + "'" +
             ", description='" + getDescription() + "'" +
             ", goals='" + getGoals() + "'" +
+            ", location='" + getLocation() + "'" +
+            ", chamber='" + getChamber() + "'" +
+            ", status='" + getStatus() + "'" +
             ", numberOfPlates=" + getNumberOfPlates() +
             ", slurryPercent=" + getSlurryPercent() +
             ", notes='" + getNotes() + "'" +
@@ -411,3 +414,4 @@ public class Experiment implements Serializable {
             "}";
     }
 }
+

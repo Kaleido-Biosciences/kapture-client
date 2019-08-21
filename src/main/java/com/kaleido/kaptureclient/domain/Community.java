@@ -553,24 +553,28 @@ public class Community implements Serializable {
     @Override
     public String toString() {
         return "Community{" +
-                "id=" + getId() +
-                ", name='" + getName() + "'" +
-                ", communityType='" + getCommunityType() + "'" +
-                ", barcode='" + getBarcode() + "'" +
-                ", description='" + getDescription() + "'" +
-                ", alias='" + getAlias() + "'" +
-                ", species='" + getSpecies() + "'" +
-                ", source='" + getSource() + "'" +
-                ", typed='" + getTyped() + "'" +
-                ", knownAntibioticResistance='" + getKnownAntibioticResistance() + "'" +
-                ", plasmid='" + getPlasmid() + "'" +
-                ", starterStocksMade='" + getStarterStocksMade() + "'" +
-                ", dataRecordName='" + getDataRecordName() + "'" +
-                ", registrationDate='" + getRegistrationDate() + "'" +
-                ", bsiId='" + getBsiId() + "'" +
-                ", bsiName='" + getBsiName() + "'" +
-                ", notes='" + getNotes() + "'" +
-                "}";
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", communityType='" + getCommunityType() + "'" +
+            ", barcode='" + getBarcode() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", alias='" + getAlias() + "'" +
+            ", species='" + getSpecies() + "'" +
+            ", source='" + getSource() + "'" +
+            ", typed='" + getTyped() + "'" +
+            ", knownAntibioticResistance='" + getKnownAntibioticResistance() + "'" +
+            ", plasmid='" + getPlasmid() + "'" +
+            ", starterStocksMade='" + getStarterStocksMade() + "'" +
+            ", dataRecordName='" + getDataRecordName() + "'" +
+            ", registrationDate='" + getRegistrationDate() + "'" +
+            ", bsiId='" + getBsiId() + "'" +
+            ", bsiName='" + getBsiName() + "'" +
+            ", notes='" + getNotes() + "'" +
+            ", sourceType='" + getSourceType() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", growthRequirement='" + getGrowthRequirement() + "'" +
+            ", pathogen='" + getPathogen() + "'" +
+            ", gramStain='" + getGramStain() + "'" +
+            "}";
     }
 }
-
