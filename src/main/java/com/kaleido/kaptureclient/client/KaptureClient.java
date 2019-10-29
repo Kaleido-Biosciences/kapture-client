@@ -155,11 +155,8 @@ public class KaptureClient<E> {
             checkSearchFields(fieldValueMap.keySet());
 
 
-            ResponseEntity<List<E>> responseEntity =
-                    restTemplate.exchange(findByFieldsEqualUri(fieldValueMap, pageNumber, pageSize),
-                            HttpMethod.GET, null, parameterizedTypeReference);
-
-            return responseEntity;
+            return restTemplate.exchange(findByFieldsEqualUri(fieldValueMap, pageNumber, pageSize),
+                    HttpMethod.GET, null, parameterizedTypeReference);
         });
     }
 
@@ -243,6 +240,16 @@ public class KaptureClient<E> {
         return retryTemplate.execute(arg0 -> restTemplate.getForEntity(endpoint + "/" + entityId, entityClass));
     }
 
+    /**
+     * Find and entity using it's {@code id}.
+     *
+     * @param methodName the id of the entity
+     * @return A response with the matching entity (if any)
+     */
+    public ResponseEntity<E> findOneByMethod(final String methodName, final String value) {
+        return retryTemplate.execute(arg0 -> restTemplate.getForEntity(endpoint + "/" + methodName + "/" + value, entityClass));
+    }
+
     public ResponseEntity<List<E>> findAll() {
         return findAll(DEFAULT_PAGE, DEFAULT_SIZE);
     }
@@ -280,6 +287,20 @@ public class KaptureClient<E> {
         });
     }
 
+    /**
+     * Save an entity. If the entity has an {@code id} an attempt will be made to update it. If it doesn't have an
+     * {@code id} a new entity will be created.
+     *
+     * @param entityList the list of an entity to create or update
+     * @return A response with a Body equal to the created or updated entity. If created the {@code id} will now be
+     * set.
+     */
+    public ResponseEntity<List<E>> saveAll(@Valid List<E> entityList) {
+        return retryTemplate.execute(arg0 -> {
+                return restTemplate.postForObject(endpoint + "/save-all", entityList, ResponseEntity.class);
+            }
+        );
+    }
 
     /**
      * Deletes the entity with the matching {@code entityId}.
@@ -423,7 +444,7 @@ public class KaptureClient<E> {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(endpoint);
 
         //construct parts of the template to be expanded by the factory
-        fieldValMap.forEach((key, value) -> builder.queryParam(key + ".equals", "{"+key+"}"));
+        fieldValMap.forEach((key, value) -> builder.queryParam(key + ".equals", "{" + key + "}"));
 
         //add the page number and page size parameters to the query
         builder.queryParam(PAGE, pageNumber).queryParam(SIZE, pageSize);
