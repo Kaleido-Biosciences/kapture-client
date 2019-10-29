@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -95,6 +96,30 @@ public class KaptureClientTest {
     }
 
     @Test
+    public void findOneByMethod() {
+        String methodName = "/label";
+        server.expect(ExpectedCount.once(),
+                requestTo(kaptureClientProperties.getBase() + kaptureClientProperties.getBatchEndpoint() + methodName + "/test"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.OK));
+
+        kaptureClient.findOneByMethod("label", "test");
+        server.verify();
+    }
+
+    @Test(expected = HttpClientErrorException.class)
+    public void findOneByMethodNoEndpointShouldThrowNotFound() {
+        String methodName = "/label";
+        server.expect(ExpectedCount.once(),
+                requestTo(kaptureClientProperties.getBase() + kaptureClientProperties.getBatchEndpoint() + methodName + "/test"))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withStatus(HttpStatus.NOT_FOUND));
+
+        kaptureClient.findOneByMethod("label", "test");
+        server.verify();
+    }
+
+    @Test
     public void search() {
         server.expect(ExpectedCount.once(),
                 requestTo(kaptureClientProperties.getBase() + kaptureClientProperties.getSearchPathComponent() + "/"
@@ -119,7 +144,7 @@ public class KaptureClientTest {
         kaptureClient.search("foo", 10, 30);
         server.verify();
     }
-    
+
     @Test
     public void searchRetryOnce() {
         server.expect(ExpectedCount.once(),
@@ -185,7 +210,7 @@ public class KaptureClientTest {
         kaptureClient.search("foo");
         server.verify();
     }
-    
+
     @Test
     public void findByFieldEquals() {
         server.expect(ExpectedCount.once(),
@@ -581,6 +606,44 @@ public class KaptureClientTest {
     }
 
     @Test
+    public void saveAll() throws Exception {
+        List<Batch> batches = new ArrayList();
+        batches.add(new Batch().name("CB-123BBB"));
+        batches.add(new Batch().name("CB-345CCC"));
+
+        String jsonString = objectMapper.writeValueAsString(batches);
+        server.expect(ExpectedCount.once(),
+                requestTo(kaptureClientProperties.getBase() + kaptureClientProperties.getBatchEndpoint()
+                        + "/save-all"))
+                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
+                .andExpect(method(HttpMethod.POST))
+                .andExpect(content().json(jsonString))
+                .andRespond(withSuccess());
+
+        kaptureClient.saveAll(batches);
+        server.verify();
+    }
+
+    @Test(expected = HttpClientErrorException.class)
+    public void saveAllNoEndpointShouldThrowNotFoundError() throws Exception {
+        List<Batch> batches = new ArrayList();
+        batches.add(new Batch().name("CB-123BBB"));
+        batches.add(new Batch().name("CB-345CCC"));
+
+        String jsonString = objectMapper.writeValueAsString(batches);
+        server.expect(ExpectedCount.once(),
+                requestTo(kaptureClientProperties.getBase() + kaptureClientProperties.getBatchEndpoint()
+                        + "/save-all"))
+                .andExpect(header("Authorization", "Bearer " + userCredentials.getBearerToken()))
+                .andExpect(method(HttpMethod.POST))
+                .andExpect(content().json(jsonString))
+                .andRespond(withStatus(HttpStatus.NOT_FOUND));
+
+        kaptureClient.saveAll(batches);
+        server.verify();
+    }
+
+    @Test
     public void saveWithSetId() throws Exception {
         Batch batch = new Batch().name("CB-123BBB");
         batch.setId(10L);
@@ -741,7 +804,7 @@ public class KaptureClientTest {
         kaptureClient.delete(21L);
         server.verify();
     }
-    
+
     @Test
     public void findByName() {
         server.expect(ExpectedCount.once(),
