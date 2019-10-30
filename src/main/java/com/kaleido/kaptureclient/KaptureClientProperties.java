@@ -68,6 +68,7 @@ public class KaptureClientProperties {
     private String supplementMetadataEndpoint = "supplement-metadata";
     private String userEndpoint = "users";
     private String wellEndpoint = "wells";
+    private String assayReadoutDTOEndpoint = "external-integrations/assay-readouts";
 
     private long retryInterval = 5000L;
     private double retryMultiplier = 2.0D;
@@ -480,5 +481,13 @@ public class KaptureClientProperties {
 
     public void setSupplementMetadataEndpoint(String supplementMetadataEndpoint) {
         this.supplementMetadataEndpoint = supplementMetadataEndpoint;
+    }
+
+    public String getAssayReadoutDTOEndpoint() {
+        return assayReadoutDTOEndpoint;
+    }
+
+    public void setAssayReadoutDTOEndpoint(String assayReadoutDTOEndpoint) {
+        this.assayReadoutDTOEndpoint = assayReadoutDTOEndpoint;
     }
 }
