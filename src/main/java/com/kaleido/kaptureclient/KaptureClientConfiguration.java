@@ -10,6 +10,7 @@ import com.kaleido.kaptureclient.client.KaptureClient;
 import com.kaleido.kaptureclient.client.KaptureClientHTTPException;
 import com.kaleido.kaptureclient.client.KaptureResponseErrorHandler;
 import com.kaleido.kaptureclient.domain.*;
+import com.kaleido.kaptureclient.domain.dto.AssayReadoutDTO;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,9 @@ import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -462,6 +465,13 @@ public class KaptureClientConfiguration {
                         kaptureClientProperties.getSearchPathComponent() + "/"
                         + kaptureClientProperties.getWellEndpoint(),
                 restTemplate, retryTemplate, Well.class);
+    }
+
+    @Bean
+    KaptureClient<AssayReadoutDTO> assayReadoutDTOClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getAssayReadoutDTOEndpoint(),
+                null,
+                restTemplate, retryTemplate, AssayReadoutDTO.class);
     }
 
 }
