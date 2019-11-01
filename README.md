@@ -94,3 +94,24 @@ If the Kapture application is updated to provide new Entities then the following
                 restTemplate, NewEntity.class);
     }
 ```
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Kaleido-Biosciences/fetch/tags). 
+
+## Authors
+* **Mark Schreiber** - *Initial work* - [@markjschreiber](https://github.com/markjschreiber)
+* **Pat Kyle** - *Initial work* - [@psk788](https://github.com/psk788)
+* **Daisy Flemming** - *Initial work* - [@daisyflemming](https://github.com/daisyflemming)
+* **Wes Fowlks** - *Initial work* - [@wfowlks](https://github.com/wfowlks)
+
+See also the list of [contributors](https://github.com/Kaleido-Biosciences/fetch/graphs/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the BSD 3-clause "New" or "Revised" License - see the [LICENSE.md](LICENSE.md) file for details
+
