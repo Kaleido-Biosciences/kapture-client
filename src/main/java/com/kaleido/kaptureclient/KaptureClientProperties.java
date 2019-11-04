@@ -19,6 +19,15 @@ import org.springframework.retry.annotation.EnableRetry;
 @EnableRetry
 public class KaptureClientProperties {
 
+    /*
+     * The properties username, password and base assume a localhost server where those credentials would be expected
+     * to work (or would be overridden using standard Spring externalization of configuration methods). By switching the
+     * values of username, password and the base URL you can develop against a local host test server, remote test server
+     * using the same code base that you would then deploy to production and connect to a production server. Each time
+     * you only need to over-ride the relevant variables using a environment statements such as
+     * 'export KAPTURE_CLIENT_USERNAME=my_user_name' 'export KAPTURE_CLIENT_PASSWORD=my_password'
+     * KAPTURE_CLIENT_BASE=https://myserver.com/api/
+     */
     private String username = "admin";
     private String password = "admin";
     private String base = "http://localhost:8080/api/";
