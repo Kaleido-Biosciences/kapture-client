@@ -296,7 +296,12 @@ public class KaptureClient<E> {
      * set.
      */
     public ResponseEntity<List<E>> saveAll(@Valid List<E> entityList) {
-        return retryTemplate.execute(arg0 -> restTemplate.postForObject(endpoint + "/save-all", entityList, ResponseEntity.class)
+        return retryTemplate.execute(arg0 -> {
+                HttpEntity<Object> requestEntity = new HttpEntity<Object>(entityList);
+                return restTemplate
+                        .exchange(endpoint + "/save-all", HttpMethod.POST, requestEntity, new ParameterizedTypeReference<List<E>>() {
+                        });
+                }
         );
     }
 
