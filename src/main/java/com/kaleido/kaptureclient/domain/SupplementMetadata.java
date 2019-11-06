@@ -30,8 +30,7 @@ public class SupplementMetadata implements Serializable {
     private Double treatmentTime;
 
     @NotNull
-    @JsonIgnoreProperties("")
-    private Concept concentrationUnit;
+    private String concentrationUnit;
 
     @JsonIgnoreProperties("")
     private Supplement supplement;
@@ -90,17 +89,17 @@ public class SupplementMetadata implements Serializable {
         this.treatmentTime = treatmentTime;
     }
 
-    public Concept getConcentrationUnit() {
+    public String getConcentrationUnit() {
         return concentrationUnit;
     }
 
-    public SupplementMetadata concentrationUnit(Concept concept) {
-        this.concentrationUnit = concept;
+    public SupplementMetadata concentrationUnit(String concentrationUnit) {
+        this.concentrationUnit = concentrationUnit;
         return this;
     }
 
-    public void setConcentrationUnit(Concept concept) {
-        this.concentrationUnit = concept;
+    public void setConcentrationUnit(String concentrationUnit) {
+        this.concentrationUnit = concentrationUnit;
     }
 
     public Supplement getSupplement() {
@@ -154,7 +153,7 @@ public class SupplementMetadata implements Serializable {
         return "SupplementMetadata{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", concentration=" + getConcentration() +
+            ", concentration=" + getConcentration() + ", concentrationUnit=" + getConcentrationUnit() +
             ", treatmentTime=" + getTreatmentTime() +
             "}";
     }
