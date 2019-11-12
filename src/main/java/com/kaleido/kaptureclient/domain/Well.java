@@ -37,7 +37,7 @@ public class Well implements Serializable {
     @JsonIgnoreProperties("")
     private Platemap platemap;
 
-    @JsonIgnoreProperties("wells")
+    @JsonIgnoreProperties({"wells", "communityCompositions", "supplementsMetadata", "batchLotCompositions", "mediaLotCompositions"})
     private Sample sample;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
