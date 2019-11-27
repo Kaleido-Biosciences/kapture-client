@@ -36,11 +36,12 @@ public class Platemap implements Serializable {
     @Deprecated
     private Experiment experiment;
 
-    @JsonIgnoreProperties("")
-    private Concept platePurpose;
+    private String platePurpose;
 
     @JsonIgnoreProperties("")
     private PlateType plateType;
+
+    private String barcode;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -77,17 +78,17 @@ public class Platemap implements Serializable {
         this.experiment = experiment;
     }
 
-    public Concept getPlatePurpose() {
+    public String getPlatePurpose() {
         return platePurpose;
     }
 
-    public Platemap platePurpose(Concept concept) {
-        this.platePurpose = concept;
+    public Platemap platePurpose(String platePurpose) {
+        this.platePurpose = platePurpose;
         return this;
     }
 
-    public void setPlatePurpose(Concept concept) {
-        this.platePurpose = concept;
+    public void setPlatePurpose(String platePurpose) {
+        this.platePurpose = platePurpose;
     }
 
     public PlateType getPlateType() {
@@ -102,7 +103,19 @@ public class Platemap implements Serializable {
     public void setPlateType(PlateType plateType) {
         this.plateType = plateType;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public void setBarcode(String barcode){
+        this.barcode = barcode;
+    }
+
+    public String getBarcode(){
+        return barcode;
+    }
+
+    public Platemap barcode( String barcode){
+        this.barcode = barcode;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -127,8 +140,8 @@ public class Platemap implements Serializable {
     @Override
     public String toString() {
         return "Platemap{" +
-            "id=" + getId() +
-            ", plateNumber=" + getPlateNumber() +
+            "id=" + getId() + ", barcode=" + getBarcode() +
+            ", plateNumber=" + getPlateNumber() + ", platePurpose=" + getPlatePurpose() +
             "}";
     }
 }
