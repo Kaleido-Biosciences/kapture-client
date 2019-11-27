@@ -28,6 +28,16 @@ public class Platemap implements Serializable {
     private Integer plateNumber;
 
     /**
+     * The barcode of the plate
+     */
+    private String barcode;
+
+    /**
+     * The purpose of the plate
+     */
+    private String platePurpose;
+
+    /**
      * The experiment for the platemap
      * @deprecated It is now recommended that samples be directly connected to the experiment that created them rather
      * than via a platemap.
@@ -35,9 +45,6 @@ public class Platemap implements Serializable {
     @JsonIgnoreProperties("")
     @Deprecated
     private Experiment experiment;
-
-    @JsonIgnoreProperties("")
-    private Concept platePurpose;
 
     @JsonIgnoreProperties("")
     private PlateType plateType;
@@ -64,6 +71,32 @@ public class Platemap implements Serializable {
         this.plateNumber = plateNumber;
     }
 
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public Platemap barcode(String barcode) {
+        this.barcode = barcode;
+        return this;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getPlatePurpose() {
+        return platePurpose;
+    }
+
+    public Platemap platePurpose(String platePurpose) {
+        this.platePurpose = platePurpose;
+        return this;
+    }
+
+    public void setPlatePurpose(String platePurpose) {
+        this.platePurpose = platePurpose;
+    }
+
     public Experiment getExperiment() {
         return experiment;
     }
@@ -75,19 +108,6 @@ public class Platemap implements Serializable {
 
     public void setExperiment(Experiment experiment) {
         this.experiment = experiment;
-    }
-
-    public Concept getPlatePurpose() {
-        return platePurpose;
-    }
-
-    public Platemap platePurpose(Concept concept) {
-        this.platePurpose = concept;
-        return this;
-    }
-
-    public void setPlatePurpose(Concept concept) {
-        this.platePurpose = concept;
     }
 
     public PlateType getPlateType() {
@@ -127,8 +147,11 @@ public class Platemap implements Serializable {
     @Override
     public String toString() {
         return "Platemap{" +
-            "id=" + getId() +
-            ", plateNumber=" + getPlateNumber() +
-            "}";
+                "id=" + getId() +
+                ", plateNumber=" + getPlateNumber() +
+                ", barcode='" + getBarcode() + "'" +
+                ", platePurpose='" + getPlatePurpose() + "'" +
+                "}";
     }
 }
+
