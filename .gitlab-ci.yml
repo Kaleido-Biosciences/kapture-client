@@ -10,22 +10,13 @@ variables:
   SPRING_PROFILES_ACTIVE: default
 
 stages:
-  - build
   - test
   - deploy
 
-maven-build:
-  image: maven:3.5.4-jdk-8-alpine
-  stage: build
-  script: "mvn package -B"
-  artifacts:
-    paths:
-      - target/*.jar
-
-maven-deploy-capture-client:
+maven-deploy-kapture-client:
   image: maven:3.5.4-jdk-8-alpine
   stage: deploy
   script:
-    - mvn clean deploy
+    - mvn clean deploy -Dregistry=https://maven.pkg.github.com/Kaleido-Biosciences -Dtoken=${GH_TOKEN}
   only:
     - master
