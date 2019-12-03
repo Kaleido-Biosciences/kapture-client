@@ -11,12 +11,3 @@ variables:
 
 stages:
   - test
-  - deploy
-
-maven-deploy-kapture-client:
-  image: maven:3.5.4-jdk-8-alpine
-  stage: deploy
-  script:
-    - mvn clean deploy -Dregistry=https://maven.pkg.github.com/Kaleido-Biosciences -Dtoken=${GH_TOKEN}
-  only:
-    - master
