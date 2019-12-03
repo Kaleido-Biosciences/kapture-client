@@ -58,13 +58,10 @@
     </dependencies>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>https://nexus.apps.kaleidobio.com/repository/maven-snapshots-s3/</url>
-        </snapshotRepository>
         <repository>
-            <id>nexus-releases</id>
-            <url>https://nexus.apps.kaleidobio.com/repository/maven-releases-s3/</url>
+            <id>github</id>
+            <name>Kaleido GitHub Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Kaleido-Biosciences/kapture-client</url>
         </repository>
     </distributionManagement>
 
