@@ -26,10 +26,9 @@ public class Experiment implements Serializable {
     private Long id;
 
     /**
-     * Holds information on each ex-vivo experiment conducted. Must begin with G followed by one or more digits.
+     * Holds information on each Activity/Experiment name
      */
     @NotNull
-    @Pattern(regexp = "G\\d+")
     private String name;
 
     /**
@@ -73,6 +72,12 @@ public class Experiment implements Serializable {
      * The Status of the experiment
      */
     private String status;
+
+    /**
+     * The type of activity
+     */
+    private String activityType;
+
     /**
      * The number of plates
      */
@@ -244,6 +249,19 @@ public class Experiment implements Serializable {
         this.status = status;
     }
 
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public Experiment activityType(String activityType) {
+        this.activityType = activityType;
+        return this;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+
     public Integer getNumberOfPlates() {
         return numberOfPlates;
     }
@@ -397,21 +415,22 @@ public class Experiment implements Serializable {
     @Override
     public String toString() {
         return "Experiment{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", studyEnvironment='" + getStudyEnvironment() + "'" +
-            ", studyName='" + getStudyName() + "'" +
-            ", startDate='" + getStartDate() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", goals='" + getGoals() + "'" +
-            ", location='" + getLocation() + "'" +
-            ", chamber='" + getChamber() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", numberOfPlates=" + getNumberOfPlates() +
-            ", slurryPercent=" + getSlurryPercent() +
-            ", notes='" + getNotes() + "'" +
-            ", dataRecordName='" + getDataRecordName() + "'" +
-            "}";
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", studyEnvironment='" + getStudyEnvironment() + "'" +
+                ", studyName='" + getStudyName() + "'" +
+                ", startDate='" + getStartDate() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", goals='" + getGoals() + "'" +
+                ", location='" + getLocation() + "'" +
+                ", chamber='" + getChamber() + "'" +
+                ", status='" + getStatus() + "'" +
+                ", activityType='" + getActivityType() + "'" +
+                ", numberOfPlates=" + getNumberOfPlates() +
+                ", slurryPercent=" + getSlurryPercent() +
+                ", notes='" + getNotes() + "'" +
+                ", dataRecordName='" + getDataRecordName() + "'" +
+                "}";
     }
 }
 
