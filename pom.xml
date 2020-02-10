@@ -9,9 +9,27 @@
 
     <groupId>com.kaleido</groupId>
     <artifactId>kapture-client</artifactId>
-    <version>3.2.18</version>
-    <name>kapture-client</name>
+    <version>3.2.19</version>
     <packaging>jar</packaging>
+
+    <name>kapture-client</name>
+    <description>A data schema for life sciences, additionally a client for connecting to the Kapture application</description>
+    <url>https://github.com/Kaleido-Biosciences/kapture-client</url>
+
+    <licenses>
+        <license>
+            <name>BSD 3-Clause License</name>
+            <url>https://opensource.org/licenses/BSD-3-Clause</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:https://github.com/Kaleido-Biosciences/kapture-client.git</connection>
+        <developerConnection>scm:git:ssh://github.com/Kaleido-Biosciences/kapture-client.git</developerConnection>
+        <url>https://github.com/Kaleido-Biosciences/kapture-client</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -59,10 +77,58 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
-            <name>Kaleido GitHub Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/Kaleido-Biosciences/kapture-client</url>
+            <id>ossrh</id>
+            <name>Kaleido Maven Central</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
