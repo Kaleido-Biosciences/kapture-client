@@ -29,7 +29,6 @@ import java.util.Map;
  * Provides the {@code @Beans} needed for the Kapture client. Applications using this library should include this class
  * in the list of scanned classes or packages. {@code @Beans} in this class are configured through externalized configuration
  * such as an {@code application.properties} file via the {@code KaptureClientProperties} class
- * {@see KaptureClientProperties}
  */
 @SpringBootApplication
 @EnableConfigurationProperties(KaptureClientProperties.class)
