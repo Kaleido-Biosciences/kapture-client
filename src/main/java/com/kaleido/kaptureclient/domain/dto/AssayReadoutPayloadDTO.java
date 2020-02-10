@@ -68,18 +68,18 @@ public class AssayReadoutPayloadDTO {
 
     /**
      * Constructor for when an ID is available.
-     * @param id
-     * @param assayNumber
-     * @param value
-     * @param unit
-     * @param isReleased
-     * @param timestamp
-     * @param temperature
-     * @param dilutionFactor
-     * @param timePoint
-     * @param protocolName
-     * @param analyteName
-     * @param assayReadoutPropertyList
+     * @param id id of the assay readout payload
+     * @param assayNumber the assay number for the assay readout
+     * @param value the assay value read from the machine/assay
+     * @param unit the unit of the assay
+     * @param isReleased if the data has been approved for release
+     * @param timestamp the timestamp when the assay readout was performed
+     * @param temperature the temperature the assay was performed at
+     * @param dilutionFactor the amount of dilution for the well
+     * @param timePoint the incubation time of the well before the assay
+     * @param protocolName the name of the protocol of the assay being performed
+     * @param analyteName the name of the analyte being measured
+     * @param assayReadoutPropertyList Not currently used but any properties of the assay readout
      */
     public AssayReadoutPayloadDTO(Long id,
                                   Integer assayNumber,
@@ -109,17 +109,17 @@ public class AssayReadoutPayloadDTO {
 
     /**
      * Constructor for when there is no ID effectively creating a new record
-     * @param assayNumber
-     * @param value
-     * @param unit
-     * @param isReleased
-     * @param timestamp
-     * @param temperature
-     * @param dilutionFactor
-     * @param timePoint
-     * @param protocolName
-     * @param analyteName
-     * @param assayReadoutPropertyList
+     *  @param assayNumber the assay number for the assay readout
+     * @param value the assay value read from the machine/assay
+     * @param unit the unit of the assay
+     * @param isReleased if the data has been approved for release
+     * @param timestamp the timestamp when the assay readout was performed
+     * @param temperature the temperature the assay was performed at
+     * @param dilutionFactor the amount of dilution for the well
+     * @param timePoint the incubation time of the well before the assay
+     * @param protocolName the name of the protocol of the assay being performed
+     * @param analyteName the name of the analyte being measured
+     * @param assayReadoutPropertyList Not currently used but any properties of the assay readout
      */
     public AssayReadoutPayloadDTO(Integer assayNumber,
                                   Double value,
