@@ -36,9 +36,9 @@ public class AssayReadoutPropertyDTO {
 
     /**
      * This is the constructor for properties with text value
-     * @param id
-     * @param name
-     * @param textValue
+     * @param id id of the property
+     * @param name name of the property
+     * @param textValue text value of the property
      */
     public AssayReadoutPropertyDTO(Long id,
                                    String name,
@@ -53,9 +53,9 @@ public class AssayReadoutPropertyDTO {
 
     /**
      * Constructor for properties with integer values
-     * @param id
-     * @param name
-     * @param integerValue
+     * @param id id of the property
+     * @param name name of the property
+     * @param integerValue Integer value of the property
      */
     public AssayReadoutPropertyDTO(Long id,
                                    String name,
@@ -70,9 +70,9 @@ public class AssayReadoutPropertyDTO {
 
     /**
      * Constructor for properties with double values
-     * @param id
-     * @param name
-     * @param precisionValue
+     * @param id id of the property
+     * @param name name of the property
+     * @param precisionValue Precision/Float value of the key
      */
     public AssayReadoutPropertyDTO(Long id,
                                    String name,
@@ -87,9 +87,9 @@ public class AssayReadoutPropertyDTO {
 
     /**
      * Constructor for Time value
-     * @param id
-     * @param name
-     * @param timeValue
+     * @param id id of the property
+     * @param name name of the property
+     * @param timeValue time value of the property
      */
     public AssayReadoutPropertyDTO(Long id,
                                    String name,

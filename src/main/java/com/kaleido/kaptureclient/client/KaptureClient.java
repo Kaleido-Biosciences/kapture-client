@@ -309,8 +309,6 @@ public class KaptureClient<E> {
      * Deletes the entity with the matching {@code entityId}.
      *
      * @param entityId the id of the entity to delete
-     * @return a response with no body. The status and headers can be inspected to determine the success or otherwise
-     * of the deletion.
      */
     public void delete(final Long entityId) {
         retryTemplate.execute(arg0 -> {
