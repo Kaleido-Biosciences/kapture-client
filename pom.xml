@@ -9,7 +9,7 @@
 
     <groupId>com.kaleido</groupId>
     <artifactId>kapture-client</artifactId>
-    <version>3.2.19</version>
+    <version>3.2.20</version>
     <packaging>jar</packaging>
 
     <name>kapture-client</name>

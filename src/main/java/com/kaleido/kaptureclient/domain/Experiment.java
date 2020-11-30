@@ -53,6 +53,11 @@ public class Experiment implements Serializable {
     private String description;
 
     /**
+     * The project the activity is associated with (e.g. TMA, SCFA, etc...)
+     */
+    private String project;
+
+    /**
      * The goals of the study
      */
     private String goals;
@@ -195,6 +200,15 @@ public class Experiment implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public Experiment project(String project) {
+        this.project = project;
+        return this;
     }
 
     public String getGoals() {
@@ -421,6 +435,7 @@ public class Experiment implements Serializable {
                 ", studyName='" + getStudyName() + "'" +
                 ", startDate='" + getStartDate() + "'" +
                 ", description='" + getDescription() + "'" +
+                ", project='" + getProject() + "'" +
                 ", goals='" + getGoals() + "'" +
                 ", location='" + getLocation() + "'" +
                 ", chamber='" + getChamber() + "'" +
