@@ -62,6 +62,7 @@ public class KaptureClientProperties {
     private String nmrAssayEndpoint = "nmr-assays";
     private String nmrPeakEndpoint = "nmr-peaks";
     private String noteEndpoint = "notes";
+    private String notebookEndpoint = "notebook";
     private String observedTaxonomicUnitEndpoint = "observed-taxonomic-units";
     private String observedTaxonomicUnitCountEndpoint = "observed-taxonomic-unit-counts";
     private String otuCountPropertyEndpoint = "otu-count-properties";
@@ -291,6 +292,10 @@ public class KaptureClientProperties {
     public void setNoteEndpoint(String noteEndpoint) {
         this.noteEndpoint = noteEndpoint;
     }
+
+    public String getNotebookEndpoint() { return notebookEndpoint;}
+
+    public void setNotebookEndpoint(String notebookEndpoint) { this.notebookEndpoint = notebookEndpoint;}
 
     public String getObservedTaxonomicUnitEndpoint() {
         return observedTaxonomicUnitEndpoint;

@@ -341,6 +341,15 @@ public class KaptureClientConfiguration {
     }
 
     @Bean
+    KaptureClient<Notebook> notebookClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getNotebookEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getNotebookEndpoint(),
+                restTemplate, retryTemplate, Notebook.class);
+    }
+
+    @Bean
     KaptureClient<ObservedTaxonomicUnit> observedTaxonomicUnitClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
         return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getObservedTaxonomicUnitEndpoint(),
                 kaptureClientProperties.getBase() +
