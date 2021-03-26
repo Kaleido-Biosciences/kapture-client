@@ -430,22 +430,22 @@ public class Experiment implements Serializable {
     @Override
     public String toString() {
         return "Experiment{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", studyEnvironment='" + getStudyEnvironment() + "'" +
-            ", studyName='" + getStudyName() + "'" +
-            ", startDate='" + getStartDate() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", project='" + getProject() + "'" +
-            ", goals='" + getGoals() + "'" +
-            ", location='" + getLocation() + "'" +
-            ", chamber='" + getChamber() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", activityType='" + getActivityType() + "'" +
-            ", numberOfPlates=" + getNumberOfPlates() +
-            ", slurryPercent=" + getSlurryPercent() +
-            ", notes='" + getNotes() + "'" +
-            ", dataRecordName='" + getDataRecordName() + "'" +
-            "}";
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", studyEnvironment='" + getStudyEnvironment() + "'" +
+                ", studyName='" + getStudyName() + "'" +
+                ", startDate='" + getStartDate() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", project='" + getProject() + "'" +
+                ", goals='" + getGoals() + "'" +
+                ", location='" + getLocation() + "'" +
+                ", chamber='" + getChamber() + "'" +
+                ", status='" + getStatus() + "'" +
+                ", activityType='" + getActivityType() + "'" +
+                ", numberOfPlates=" + getNumberOfPlates() +
+                ", slurryPercent=" + getSlurryPercent() +
+                ", notes='" + getNotes() + "'" +
+                ", dataRecordName='" + getDataRecordName() + "'" +
+                "}";
     }
 }
