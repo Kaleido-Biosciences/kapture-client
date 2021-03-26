@@ -61,7 +61,9 @@ public class KaptureClientProperties {
     private String mediaLotCompositionEndpoint = "media-lot-compositions";
     private String nmrAssayEndpoint = "nmr-assays";
     private String nmrPeakEndpoint = "nmr-peaks";
+    private String nmrImportEndpoint = "nmr-imports";
     private String noteEndpoint = "notes";
+    private String notebookEndpoint = "notebook";
     private String observedTaxonomicUnitEndpoint = "observed-taxonomic-units";
     private String observedTaxonomicUnitCountEndpoint = "observed-taxonomic-unit-counts";
     private String otuCountPropertyEndpoint = "otu-count-properties";
@@ -70,6 +72,7 @@ public class KaptureClientProperties {
     private String plateTypeEndpoint = "plate-types";
     private String processedReadoutEndpoint = "processed-readouts";
     private String sampleEndpoint = "samples";
+    private String samplePropertyEndpoint = "sample-properties";
     private String sampleTreatmentEndpoint = "sample-treatments";
     private String scientistEndpoint = "scientists";
     private String sequencingRunEndpoint = "sequencing-runs";
@@ -78,6 +81,7 @@ public class KaptureClientProperties {
     private String userEndpoint = "users";
     private String wellEndpoint = "wells";
     private String assayReadoutDTOEndpoint = "external-integrations/assay-readouts";
+    private String limsSequencingFileDTOEndpoint = "external-integrations/shallow-shotgun/load";
 
     private long retryInterval = 5000L;
     private double retryMultiplier = 2.0D;
@@ -292,6 +296,10 @@ public class KaptureClientProperties {
         this.noteEndpoint = noteEndpoint;
     }
 
+    public String getNotebookEndpoint() { return notebookEndpoint;}
+
+    public void setNotebookEndpoint(String notebookEndpoint) { this.notebookEndpoint = notebookEndpoint;}
+
     public String getObservedTaxonomicUnitEndpoint() {
         return observedTaxonomicUnitEndpoint;
     }
@@ -314,6 +322,22 @@ public class KaptureClientProperties {
 
     public void setOtuCountPropertyEndpoint(String otuCountPropertyEndpoint) {
         this.otuCountPropertyEndpoint = otuCountPropertyEndpoint;
+    }
+
+    public String getNmrImportEndpoint() {
+        return nmrImportEndpoint;
+    }
+
+    public void setNmrImportEndpoint(String nmrImportEndpoint) {
+        this.nmrImportEndpoint = nmrImportEndpoint;
+    }
+
+    public String getSamplePropertyEndpoint() {
+        return samplePropertyEndpoint;
+    }
+
+    public void setSamplePropertyEndpoint(String samplePropertyEndpoint) {
+        this.samplePropertyEndpoint = samplePropertyEndpoint;
     }
 
     public String getPersistentAuditEventEndpoint() {
@@ -498,5 +522,13 @@ public class KaptureClientProperties {
 
     public void setAssayReadoutDTOEndpoint(String assayReadoutDTOEndpoint) {
         this.assayReadoutDTOEndpoint = assayReadoutDTOEndpoint;
+    }
+
+    public String getLimsSequencingFileDTOEndpoint() {
+        return limsSequencingFileDTOEndpoint;
+    }
+
+    public void setLimsSequencingFileDTOEndpoint(String limsSequencingFileDTOEndpoint) {
+        this.limsSequencingFileDTOEndpoint = limsSequencingFileDTOEndpoint;
     }
 }
