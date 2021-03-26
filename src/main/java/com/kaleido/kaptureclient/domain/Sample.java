@@ -51,11 +51,6 @@ public class Sample implements Serializable {
     @Deprecated
     private Community community;
 
-    @NotNull
-    @JsonIgnoreProperties("")
-    @Deprecated
-    private Batch batch;
-
     /**
      * The experiment that the sample was prepared for
      */
@@ -63,18 +58,24 @@ public class Sample implements Serializable {
     private Experiment experiment;
 
     /**
-     * The Community Composition within a Sample
+     * The Communities within a Sample
      */
-    private Set<CommunityComposition> communityCompositions = new HashSet<>();
+    private Set<Community> communities = new HashSet<>();
+
+    /**
+     * The Batches within a Sample
+     */
+    private Set<BatchLot> batchLots = new HashSet<>();
+
+    /**
+     * The Media within a Sample
+     */
+    private Set<MediaLot> mediaLots = new HashSet<>();
 
     /**
      * The supplement added to a sample with media
      */
     private Set<SupplementMetadata> supplementsMetadata = new HashSet<>();
-
-    private Set<BatchLotComposition> batchLotCompositions = new HashSet<>();
-
-    private Set<MediaLotComposition> mediaLotCompositions = new HashSet<>();
 
     private Set<Well> wells = new HashSet<>();
 
@@ -165,19 +166,6 @@ public class Sample implements Serializable {
         this.community = community;
     }
 
-    public Batch getBatch() {
-        return batch;
-    }
-
-    public Sample batch(Batch batch) {
-        this.batch = batch;
-        return this;
-    }
-
-    public void setBatch(Batch batch) {
-        this.batch = batch;
-    }
-
     public Experiment getExperiment() {
         return experiment;
     }
@@ -191,35 +179,81 @@ public class Sample implements Serializable {
         this.experiment = experiment;
     }
 
-    public Set<CommunityComposition> getCommunityCompositions() {
-        return communityCompositions;
+    public Set<Community> getCommunities() {
+        return communities;
     }
 
-    public Sample communityCompositions(Set<CommunityComposition> communityCompositions) {
-        this.communityCompositions = communityCompositions;
+    public Sample communities(Set<Community> communities) {
+        this.communities = communities;
         return this;
     }
 
-    public Sample addCommunityComposition(CommunityComposition communityComposition) {
-        this.communityCompositions.add(communityComposition);
+    public Sample addCommunities(Community community) {
+        this.communities.add(community);
         return this;
     }
 
-    public Sample removeCommunityComposition(CommunityComposition communityComposition) {
-        this.communityCompositions.remove(communityComposition);
+    public Sample removeCommunities(Community community) {
+        this.communities.remove(community);
         return this;
     }
 
-    public void setCommunityCompositions(Set<CommunityComposition> communityCompositions) {
-        this.communityCompositions = communityCompositions;
+    public void setCommunities(Set<Community> communities) {
+        this.communities = communities;
+    }
+
+    public Set<BatchLot> getBatchLots() {
+        return batchLots;
+    }
+
+    public Sample batchLots(Set<BatchLot> batchLots) {
+        this.batchLots = batchLots;
+        return this;
+    }
+
+    public Sample addBatchLots(BatchLot batchLot) {
+        this.batchLots.add(batchLot);
+        return this;
+    }
+
+    public Sample removeBatchLots(BatchLot batchLot) {
+        this.batchLots.remove(batchLot);
+        return this;
+    }
+
+    public void setBatchLots(Set<BatchLot> batchLots) {
+        this.batchLots = batchLots;
+    }
+
+    public Set<MediaLot> getMediaLots() {
+        return mediaLots;
+    }
+
+    public Sample mediaLots(Set<MediaLot> mediaLots) {
+        this.mediaLots = mediaLots;
+        return this;
+    }
+
+    public Sample addMediaLots(MediaLot mediaLot) {
+        this.mediaLots.add(mediaLot);
+        return this;
+    }
+
+    public Sample removeMediaLots(MediaLot mediaLot) {
+        this.mediaLots.remove(mediaLot);
+        return this;
+    }
+
+    public void setMediaLots(Set<MediaLot> mediaLots) {
+        this.mediaLots = mediaLots;
     }
 
     public Set<SupplementMetadata> getSupplementsMetadata() {
         return supplementsMetadata;
     }
 
-    public Sample supplementsMetadata(Set<SupplementMetadata> supplementsMetadata) {
-        this.supplementsMetadata = supplementsMetadata;
+    public Sample supplementsMetadata(Set<SupplementMetadata> supplementMetadata) {
+        this.supplementsMetadata = supplementMetadata;
         return this;
     }
 
@@ -233,54 +267,8 @@ public class Sample implements Serializable {
         return this;
     }
 
-    public void setSupplementsMetadata(Set<SupplementMetadata> supplementsMetadata) {
-        this.supplementsMetadata = supplementsMetadata;
-    }
-
-    public Set<BatchLotComposition> getBatchLotCompositions() {
-        return batchLotCompositions;
-    }
-
-    public Sample batchLotCompositions(Set<BatchLotComposition> batchLotCompositions) {
-        this.batchLotCompositions = batchLotCompositions;
-        return this;
-    }
-
-    public Sample addBatchLotCompositions(BatchLotComposition batchLotComposition) {
-        this.batchLotCompositions.add(batchLotComposition);
-        return this;
-    }
-
-    public Sample removeBatchLotCompositions(BatchLotComposition batchLotComposition) {
-        this.batchLotCompositions.remove(batchLotComposition);
-        return this;
-    }
-
-    public void setBatchLotCompositions(Set<BatchLotComposition> batchLotCompositions) {
-        this.batchLotCompositions = batchLotCompositions;
-    }
-
-    public Set<MediaLotComposition> getMediaLotCompositions() {
-        return mediaLotCompositions;
-    }
-
-    public Sample mediaLotCompositions(Set<MediaLotComposition> mediaLotCompositions) {
-        this.mediaLotCompositions = mediaLotCompositions;
-        return this;
-    }
-
-    public Sample addMediaLotCompositions(MediaLotComposition mediaLotComposition) {
-        this.mediaLotCompositions.add(mediaLotComposition);
-        return this;
-    }
-
-    public Sample removeMediaLotCompositions(MediaLotComposition mediaLotComposition) {
-        this.mediaLotCompositions.remove(mediaLotComposition);
-        return this;
-    }
-
-    public void setMediaLotCompositions(Set<MediaLotComposition> mediaLotCompositions) {
-        this.mediaLotCompositions = mediaLotCompositions;
+    public void setSupplementsMetadata(Set<SupplementMetadata> supplementMetadata) {
+        this.supplementsMetadata = supplementMetadata;
     }
 
     public Set<Well> getWells() {

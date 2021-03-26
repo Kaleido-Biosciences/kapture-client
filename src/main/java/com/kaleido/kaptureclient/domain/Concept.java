@@ -33,7 +33,7 @@ public class Concept implements Serializable {
     /**
      * The common definition of the concept in the context of it's scheme
      */
-    @Size(min = 3)
+    @Size(min = 3, max = 1000)
     private String definition;
 
     /**

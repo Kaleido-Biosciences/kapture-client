@@ -11,6 +11,7 @@ import com.kaleido.kaptureclient.client.KaptureClientHTTPException;
 import com.kaleido.kaptureclient.client.KaptureResponseErrorHandler;
 import com.kaleido.kaptureclient.domain.*;
 import com.kaleido.kaptureclient.domain.dto.AssayReadoutDTO;
+import com.kaleido.kaptureclient.domain.dto.LimsSequencingFileDTO;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -321,6 +322,15 @@ public class KaptureClientConfiguration {
                         + kaptureClientProperties.getNmrAssayEndpoint(),
                 restTemplate, retryTemplate, NmrAssay.class);
     }
+    
+    @Bean
+    KaptureClient<NmrImport> nmrImportClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getNmrImportEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getNmrImportEndpoint(),
+                restTemplate, retryTemplate, NmrImport.class);
+    }
 
     @Bean
     KaptureClient<NmrPeak> nmrPeakClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
@@ -420,6 +430,15 @@ public class KaptureClientConfiguration {
                         + kaptureClientProperties.getAnalyteTypeEndpoint(),
                 restTemplate, retryTemplate, Sample.class);
     }
+    
+    @Bean
+    KaptureClient<SampleProperty> samplePropertyClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getSamplePropertyEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getAnalyteTypeEndpoint(),
+                restTemplate, retryTemplate, SampleProperty.class);
+    }
 
     @Bean
     KaptureClient<Scientist> scientistClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
@@ -480,6 +499,13 @@ public class KaptureClientConfiguration {
         return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getAssayReadoutDTOEndpoint(),
                 null,
                 restTemplate, retryTemplate, AssayReadoutDTO.class);
+    }
+    
+    @Bean
+    KaptureClient<LimsSequencingFileDTO> limsSequencingFileDTOClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getLimsSequencingFileDTOEndpoint(),
+                null,
+                restTemplate, retryTemplate, LimsSequencingFileDTO.class);
     }
 
 }

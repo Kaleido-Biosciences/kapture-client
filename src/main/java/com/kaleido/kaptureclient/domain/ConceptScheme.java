@@ -7,6 +7,7 @@ package com.kaleido.kaptureclient.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -32,6 +33,7 @@ public class ConceptScheme implements Serializable {
     /**
      * A description of the type of concepts in the scheme
      */
+    @Size(max = 1000)
     private String description;
 
     /**

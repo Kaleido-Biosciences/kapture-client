@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
- */
-
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,7 +5,7 @@ import com.kaleido.kaptureclient.domain.enumeration.StudyEnvironment;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -17,7 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * An instance of an experiment
+ * An instance of an activity
  */
 public class Experiment implements Serializable {
 
@@ -38,19 +34,25 @@ public class Experiment implements Serializable {
     private StudyEnvironment studyEnvironment;
 
     /**
-     * The name of the study is the experiment name and study environment
+     * The name of the study is the activity name and study environment
      */
     private String studyName;
 
     /**
-     * The start date of the experiment
+     * The start date of the activity
      */
     private LocalDate startDate;
 
     /**
      * The description of the study
      */
+    @Size(max = 1000)
     private String description;
+
+    /**
+     * The project the activity is associated with (e.g. TMA, SCFA, etc...)
+     */
+    private String project;
 
     /**
      * The goals of the study
@@ -58,7 +60,7 @@ public class Experiment implements Serializable {
     private String goals;
 
     /**
-     * The location of the experiment
+     * The location of the activity
      */
     @NotNull
     private String location;
@@ -69,7 +71,7 @@ public class Experiment implements Serializable {
     private String chamber;
 
     /**
-     * The Status of the experiment
+     * The Status of the activity
      */
     private String status;
 
@@ -90,7 +92,7 @@ public class Experiment implements Serializable {
     private Double slurryPercent;
 
     /**
-     * Experiment notes
+     * Activity notes
      */
     private String notes;
 
@@ -195,6 +197,19 @@ public class Experiment implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public Experiment project(String project) {
+        this.project = project;
+        return this;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
     }
 
     public String getGoals() {
@@ -415,22 +430,22 @@ public class Experiment implements Serializable {
     @Override
     public String toString() {
         return "Experiment{" +
-                "id=" + getId() +
-                ", name='" + getName() + "'" +
-                ", studyEnvironment='" + getStudyEnvironment() + "'" +
-                ", studyName='" + getStudyName() + "'" +
-                ", startDate='" + getStartDate() + "'" +
-                ", description='" + getDescription() + "'" +
-                ", goals='" + getGoals() + "'" +
-                ", location='" + getLocation() + "'" +
-                ", chamber='" + getChamber() + "'" +
-                ", status='" + getStatus() + "'" +
-                ", activityType='" + getActivityType() + "'" +
-                ", numberOfPlates=" + getNumberOfPlates() +
-                ", slurryPercent=" + getSlurryPercent() +
-                ", notes='" + getNotes() + "'" +
-                ", dataRecordName='" + getDataRecordName() + "'" +
-                "}";
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", studyEnvironment='" + getStudyEnvironment() + "'" +
+            ", studyName='" + getStudyName() + "'" +
+            ", startDate='" + getStartDate() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", project='" + getProject() + "'" +
+            ", goals='" + getGoals() + "'" +
+            ", location='" + getLocation() + "'" +
+            ", chamber='" + getChamber() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", activityType='" + getActivityType() + "'" +
+            ", numberOfPlates=" + getNumberOfPlates() +
+            ", slurryPercent=" + getSlurryPercent() +
+            ", notes='" + getNotes() + "'" +
+            ", dataRecordName='" + getDataRecordName() + "'" +
+            "}";
     }
 }
-
