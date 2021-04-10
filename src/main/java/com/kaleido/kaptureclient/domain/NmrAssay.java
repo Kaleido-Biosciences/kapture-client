@@ -1,13 +1,7 @@
-/*
- * Copyright (c) 2019. Kaleido Biosciences. All Rights Reserved
- */
-
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -42,9 +36,51 @@ public class NmrAssay implements Serializable {
     /**
      * rack number
      */
-    @NotNull
-    @Min(value = 0)
     private Integer rack;
+
+    /**
+     * rack location
+     */
+    private String rackLocation;
+
+    private String solvent;
+
+    @Size(max = 4000)
+    private String notes;
+
+    private String status;
+
+    private String notebookPage;
+
+    private String experiment;
+
+    /**
+     * spectral window
+     */
+    private Double sw;
+
+    private Double d1;
+
+    private String s3Location;
+
+    private String fileName;
+
+    /**
+     * center of spectrum
+     */
+    private Double o1p;
+
+    private String experimentType;
+
+    private String experimentDate;
+
+    private ZonedDateTime importTimestamp;
+
+    /**
+     * The notebook that's referenced to the NMR Assay
+     */
+    @JsonIgnoreProperties("")
+    private Notebook notebook;
 
     /**
      * The batch that was assayed
@@ -113,6 +149,201 @@ public class NmrAssay implements Serializable {
         this.rack = rack;
     }
 
+    public String getRackLocation() {
+        return rackLocation;
+    }
+
+    public NmrAssay rackLocation(String rackLocation) {
+        this.rackLocation = rackLocation;
+        return this;
+    }
+
+    public void setRackLocation(String rackLocation) {
+        this.rackLocation = rackLocation;
+    }
+
+    public String getSolvent() {
+        return solvent;
+    }
+
+    public NmrAssay solvent(String solvent) {
+        this.solvent = solvent;
+        return this;
+    }
+
+    public void setSolvent(String solvent) {
+        this.solvent = solvent;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public NmrAssay notes(String notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public NmrAssay status(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getNotebookPage() {
+        return notebookPage;
+    }
+
+    public NmrAssay notebookPage(String notebookPage) {
+        this.notebookPage = notebookPage;
+        return this;
+    }
+
+    public void setNotebookPage(String notebookPage) {
+        this.notebookPage = notebookPage;
+    }
+
+    public String getExperiment() {
+        return experiment;
+    }
+
+    public NmrAssay experiment(String experiment) {
+        this.experiment = experiment;
+        return this;
+    }
+
+    public void setExperiment(String experiment) {
+        this.experiment = experiment;
+    }
+
+    public Double getSw() {
+        return sw;
+    }
+
+    public NmrAssay sw(Double sw) {
+        this.sw = sw;
+        return this;
+    }
+
+    public void setSw(Double sw) {
+        this.sw = sw;
+    }
+
+    public Double getd1() {
+        return d1;
+    }
+
+    public NmrAssay d1(Double d1) {
+        this.d1 = d1;
+        return this;
+    }
+
+    public void setd1(Double d1) {
+        this.d1 = d1;
+    }
+
+    public String gets3Location() {
+        return s3Location;
+    }
+
+    public NmrAssay s3Location(String s3Location) {
+        this.s3Location = s3Location;
+        return this;
+    }
+
+    public void sets3Location(String s3Location) {
+        this.s3Location = s3Location;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public NmrAssay fileName(String fileName) {
+        this.fileName = fileName;
+        return this;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public Double geto1p() {
+        return o1p;
+    }
+
+    public NmrAssay o1p(Double o1p) {
+        this.o1p = o1p;
+        return this;
+    }
+
+    public void seto1p(Double o1p) {
+        this.o1p = o1p;
+    }
+
+    public String getExperimentType() {
+        return experimentType;
+    }
+
+    public NmrAssay experimentType(String experimentType) {
+        this.experimentType = experimentType;
+        return this;
+    }
+
+    public void setExperimentType(String experimentType) {
+        this.experimentType = experimentType;
+    }
+
+    public String getExperimentDate() {
+        return experimentDate;
+    }
+
+    public NmrAssay experimentDate(String experimentDate) {
+        this.experimentDate = experimentDate;
+        return this;
+    }
+
+    public void setExperimentDate(String experimentDate) {
+        this.experimentDate = experimentDate;
+    }
+
+    public ZonedDateTime getImportTimestamp() {
+        return importTimestamp;
+    }
+
+    public NmrAssay importTimestamp(ZonedDateTime importTimestamp) {
+        this.importTimestamp = importTimestamp;
+        return this;
+    }
+
+    public void setImportTimestamp(ZonedDateTime importTimestamp) {
+        this.importTimestamp = importTimestamp;
+    }
+
+    public Notebook getNotebook() {
+        return notebook;
+    }
+
+    public NmrAssay notebook(Notebook notebook) {
+        this.notebook = notebook;
+        return this;
+    }
+
+    public void setNotebook(Notebook notebook) {
+        this.notebook = notebook;
+    }
+
     public Batch getBatch() {
         return batch;
     }
@@ -150,11 +381,25 @@ public class NmrAssay implements Serializable {
     @Override
     public String toString() {
         return "NmrAssay{" +
-            "id=" + getId() +
-            ", assayDate='" + getAssayDate() + "'" +
-            ", assayType='" + getAssayType() + "'" +
-            ", scientist='" + getScientist() + "'" +
-            ", rack=" + getRack() +
-            "}";
+                "id=" + getId() +
+                ", assayDate='" + getAssayDate() + "'" +
+                ", assayType='" + getAssayType() + "'" +
+                ", scientist='" + getScientist() + "'" +
+                ", rack=" + getRack() +
+                ", rackLocation='" + getRackLocation() + "'" +
+                ", solvent='" + getSolvent() + "'" +
+                ", notes='" + getNotes() + "'" +
+                ", status='" + getStatus() + "'" +
+                ", notebookPage='" + getNotebookPage() + "'" +
+                ", experiment='" + getExperiment() + "'" +
+                ", sw=" + getSw() +
+                ", d1=" + getd1() +
+                ", s3Location='" + gets3Location() + "'" +
+                ", fileName='" + getFileName() + "'" +
+                ", o1p=" + geto1p() +
+                ", experimentType='" + getExperimentType() + "'" +
+                ", experimentDate='" + getExperimentDate() + "'" +
+                ", importTimestamp='" + getImportTimestamp() + "'" +
+                "}";
     }
 }
