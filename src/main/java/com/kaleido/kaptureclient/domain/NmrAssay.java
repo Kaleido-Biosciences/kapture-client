@@ -2,6 +2,7 @@ package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -42,6 +43,13 @@ public class NmrAssay implements Serializable {
      * rack location
      */
     private String rackLocation;
+
+    /**
+     * rack barcode
+     */
+    private String rackBarcode;
+
+    private Integer numScans;
 
     private String solvent;
 
@@ -160,6 +168,32 @@ public class NmrAssay implements Serializable {
 
     public void setRackLocation(String rackLocation) {
         this.rackLocation = rackLocation;
+    }
+
+    public String getRackBarcode() {
+        return rackBarcode;
+    }
+
+    public NmrAssay rackBarcode(String rackBarcode) {
+        this.rackBarcode = rackBarcode;
+        return this;
+    }
+
+    public void setRackBarcode(String rackBarcode) {
+        this.rackBarcode = rackBarcode;
+    }
+
+    public Integer getNumScans() {
+        return numScans;
+    }
+
+    public NmrAssay numScans(Integer numScans) {
+        this.numScans = numScans;
+        return this;
+    }
+
+    public void setNumScans(Integer numScans) {
+        this.numScans = numScans;
     }
 
     public String getSolvent() {
@@ -387,6 +421,8 @@ public class NmrAssay implements Serializable {
                 ", scientist='" + getScientist() + "'" +
                 ", rack=" + getRack() +
                 ", rackLocation='" + getRackLocation() + "'" +
+                ", rackBarcode='" + getRackBarcode() + "'" +
+                ", numScans=" + getNumScans() +
                 ", solvent='" + getSolvent() + "'" +
                 ", notes='" + getNotes() + "'" +
                 ", status='" + getStatus() + "'" +
