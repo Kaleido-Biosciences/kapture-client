@@ -79,6 +79,8 @@ public class Sample implements Serializable {
 
     private Set<Well> wells = new HashSet<>();
 
+    private Concept sampleType;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -164,6 +166,19 @@ public class Sample implements Serializable {
 
     public void setCommunity(Community community) {
         this.community = community;
+    }
+
+    public Concept getSampleType() {
+        return sampleType;
+    }
+
+    public Sample sampleType(Concept concept) {
+        this.sampleType = concept;
+        return this;
+    }
+
+    public void setSampleType(Concept concept) {
+        this.sampleType = concept;
     }
 
     public Experiment getExperiment() {
@@ -320,11 +335,11 @@ public class Sample implements Serializable {
     @Override
     public String toString() {
         return "Sample{" +
-            "id=" + getId() +
-            ", label='" + getLabel() + "'" +
-            ", concentration=" + getConcentration() +
-            ", slurryPercent=" + getSlurryPercent() +
-            ", timePoint=" + getTimePoint() +
-            "}";
+                "id=" + getId() +
+                ", label='" + getLabel() + "'" +
+                ", concentration=" + getConcentration() +
+                ", slurryPercent=" + getSlurryPercent() +
+                ", timePoint=" + getTimePoint() +
+                "}";
     }
 }
