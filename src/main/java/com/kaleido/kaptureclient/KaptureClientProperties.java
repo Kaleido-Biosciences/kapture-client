@@ -60,6 +60,8 @@ public class KaptureClientProperties {
     private String mediaLotEndpoint = "media-lots";
     private String mediaLotCompositionEndpoint = "media-lot-compositions";
     private String nmrAssayEndpoint = "nmr-assays";
+    private String nmrSpectraEndpoint = "nmr-projections";
+    private String nmrProjectionEndpoint = "nmr-spectras";
     private String nmrPeakEndpoint = "nmr-peaks";
     private String nmrImportEndpoint = "nmr-imports";
     private String noteEndpoint = "notes";
@@ -288,6 +290,22 @@ public class KaptureClientProperties {
         this.nmrPeakEndpoint = nmrPeakEndpoint;
     }
 
+    public String getNmrSpectraEndpoint() {
+        return nmrSpectraEndpoint;
+    }
+
+    public void setNmrSpectraEndpoint(String nmrSpectraEndpoint) {
+        this.nmrSpectraEndpoint = nmrSpectraEndpoint;
+    }
+
+    public String getNmrProjectionEndpoint() {
+        return nmrProjectionEndpoint;
+    }
+
+    public void setNmrProjectionEndpoint(String nmrProjectionEndpoint) {
+        this.nmrProjectionEndpoint = nmrProjectionEndpoint;
+    }
+
     public String getNoteEndpoint() {
         return noteEndpoint;
     }
@@ -296,9 +314,13 @@ public class KaptureClientProperties {
         this.noteEndpoint = noteEndpoint;
     }
 
-    public String getNotebookEndpoint() { return notebookEndpoint;}
+    public String getNotebookEndpoint() {
+        return notebookEndpoint;
+    }
 
-    public void setNotebookEndpoint(String notebookEndpoint) { this.notebookEndpoint = notebookEndpoint;}
+    public void setNotebookEndpoint(String notebookEndpoint) {
+        this.notebookEndpoint = notebookEndpoint;
+    }
 
     public String getObservedTaxonomicUnitEndpoint() {
         return observedTaxonomicUnitEndpoint;
@@ -464,7 +486,7 @@ public class KaptureClientProperties {
         return batchLotEndpoint;
     }
 
-    public void setBatchLotEndpoint(String batchLotEndpoint){
+    public void setBatchLotEndpoint(String batchLotEndpoint) {
         this.batchLotEndpoint = batchLotEndpoint;
     }
 

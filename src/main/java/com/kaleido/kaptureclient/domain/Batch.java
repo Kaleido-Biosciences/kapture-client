@@ -59,6 +59,11 @@ public class Batch implements Serializable {
     private String notebook;
 
     /**
+     * Reference to the notebook page
+     */
+
+    private String notebookPage;
+    /**
      * the Enzyme used in the synthesis
      */
     private String enzyme;
@@ -260,6 +265,20 @@ public class Batch implements Serializable {
 
     public void setNotebook(String notebook) {
         this.notebook = notebook;
+    }
+
+
+    public String getNotebookPage() {
+        return notebookPage;
+    }
+
+    public Batch notebookPage(String notebookPage) {
+        this.notebookPage = notebookPage;
+        return this;
+    }
+
+    public void setNotebookPage(String notebookPage) {
+        this.notebookPage = notebookPage;
     }
 
     public String getEnzyme() {
@@ -653,6 +672,7 @@ public class Batch implements Serializable {
             ", createdBy='" + getCreatedBy() + "'" +
             ", nMRStatus='" + getnMRStatus() + "'" +
             ", notebook='" + getNotebook() + "'" +
+            ", notebookPage='" + getNotebookPage() + "'" +
             ", enzyme='" + getEnzyme() + "'" +
             ", mfgDate='" + getMfgDate() + "'" +
             ", purity=" + getPurity() +

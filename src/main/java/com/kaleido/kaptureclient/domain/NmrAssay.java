@@ -1,8 +1,9 @@
 package com.kaleido.kaptureclient.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -37,6 +38,7 @@ public class NmrAssay implements Serializable {
     /**
      * rack number
      */
+    @Min(value = 0)
     private Integer rack;
 
     /**
@@ -83,6 +85,10 @@ public class NmrAssay implements Serializable {
     private String experimentDate;
 
     private ZonedDateTime importTimestamp;
+
+    private String limsId;
+
+    private String kidsId;
 
     /**
      * The notebook that's referenced to the NMR Assay
@@ -365,6 +371,32 @@ public class NmrAssay implements Serializable {
         this.importTimestamp = importTimestamp;
     }
 
+    public String getLimsId() {
+        return limsId;
+    }
+
+    public NmrAssay limsId(String limsId) {
+        this.limsId = limsId;
+        return this;
+    }
+
+    public void setLimsId(String limsId) {
+        this.limsId = limsId;
+    }
+
+    public String getKidsId() {
+        return kidsId;
+    }
+
+    public NmrAssay kidsId(String kidsId) {
+        this.kidsId = kidsId;
+        return this;
+    }
+
+    public void setKidsId(String kidsId) {
+        this.kidsId = kidsId;
+    }
+
     public Notebook getNotebook() {
         return notebook;
     }
@@ -415,27 +447,29 @@ public class NmrAssay implements Serializable {
     @Override
     public String toString() {
         return "NmrAssay{" +
-                "id=" + getId() +
-                ", assayDate='" + getAssayDate() + "'" +
-                ", assayType='" + getAssayType() + "'" +
-                ", scientist='" + getScientist() + "'" +
-                ", rack=" + getRack() +
-                ", rackLocation='" + getRackLocation() + "'" +
-                ", rackBarcode='" + getRackBarcode() + "'" +
-                ", numScans=" + getNumScans() +
-                ", solvent='" + getSolvent() + "'" +
-                ", notes='" + getNotes() + "'" +
-                ", status='" + getStatus() + "'" +
-                ", notebookPage='" + getNotebookPage() + "'" +
-                ", experiment='" + getExperiment() + "'" +
-                ", sw=" + getSw() +
-                ", d1=" + getd1() +
-                ", s3Location='" + gets3Location() + "'" +
-                ", fileName='" + getFileName() + "'" +
-                ", o1p=" + geto1p() +
-                ", experimentType='" + getExperimentType() + "'" +
-                ", experimentDate='" + getExperimentDate() + "'" +
-                ", importTimestamp='" + getImportTimestamp() + "'" +
-                "}";
+            "id=" + getId() +
+            ", assayDate='" + getAssayDate() + "'" +
+            ", assayType='" + getAssayType() + "'" +
+            ", scientist='" + getScientist() + "'" +
+            ", rack=" + getRack() +
+            ", rackLocation='" + getRackLocation() + "'" +
+            ", rackBarcode='" + getRackBarcode() + "'" +
+            ", numScans=" + getNumScans() +
+            ", solvent='" + getSolvent() + "'" +
+            ", notes='" + getNotes() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", notebookPage='" + getNotebookPage() + "'" +
+            ", experiment='" + getExperiment() + "'" +
+            ", sw=" + getSw() +
+            ", d1=" + getd1() +
+            ", s3Location='" + gets3Location() + "'" +
+            ", fileName='" + getFileName() + "'" +
+            ", o1p=" + geto1p() +
+            ", experimentType='" + getExperimentType() + "'" +
+            ", experimentDate='" + getExperimentDate() + "'" +
+            ", importTimestamp='" + getImportTimestamp() + "'" +
+            ", limsId='" + getLimsId() + "'" +
+            ", kidsId='" + getKidsId() + "'" +
+            "}";
     }
 }
