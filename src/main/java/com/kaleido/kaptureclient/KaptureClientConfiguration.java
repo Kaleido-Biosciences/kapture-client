@@ -330,6 +330,24 @@ public class KaptureClientConfiguration {
                         kaptureClientProperties.getSearchPathComponent() + "/"
                         + kaptureClientProperties.getNmrImportEndpoint(),
                 restTemplate, retryTemplate, NmrImport.class);
+    }   
+    
+    @Bean
+    KaptureClient<NmrProjection> nmrProjectionClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getNmrProjectionEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getNmrProjectionEndpoint(),
+                restTemplate, retryTemplate, NmrProjection.class);
+    }   
+    
+    @Bean
+    KaptureClient<NmrSpectra> nmrSpectraClient(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+        return new KaptureClient<>(kaptureClientProperties.getBase() + kaptureClientProperties.getNmrSpectraEndpoint(),
+                kaptureClientProperties.getBase() +
+                        kaptureClientProperties.getSearchPathComponent() + "/"
+                        + kaptureClientProperties.getNmrSpectraEndpoint(),
+                restTemplate, retryTemplate, NmrSpectra.class);
     }
 
     @Bean
