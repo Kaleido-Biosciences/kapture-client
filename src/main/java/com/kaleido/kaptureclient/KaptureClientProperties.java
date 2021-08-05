@@ -60,8 +60,8 @@ public class KaptureClientProperties {
     private String mediaLotEndpoint = "media-lots";
     private String mediaLotCompositionEndpoint = "media-lot-compositions";
     private String nmrAssayEndpoint = "nmr-assays";
-    private String nmrSpectraEndpoint = "nmr-projections";
-    private String nmrProjectionEndpoint = "nmr-spectras";
+    private String nmrProjectionEndpoint = "nmr-projections";
+    private String nmrSpectraEndpoint = "nmr-spectras";
     private String nmrPeakEndpoint = "nmr-peaks";
     private String nmrImportEndpoint = "nmr-imports";
     private String noteEndpoint = "notes";
