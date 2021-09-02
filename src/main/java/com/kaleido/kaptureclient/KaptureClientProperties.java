@@ -83,7 +83,7 @@ public class KaptureClientProperties {
     private String userEndpoint = "users";
     private String wellEndpoint = "wells";
     private String assayReadoutDTOEndpoint = "external-integrations/assay-readouts";
-    private String limsSequencingFileDTOEndpoint = "external-integrations/shallow-shotgun/load";
+    private String limsSequencingFileDTOEndpoint = "external-integrations/shallow-shotgun";
 
     private long retryInterval = 5000L;
     private double retryMultiplier = 2.0D;

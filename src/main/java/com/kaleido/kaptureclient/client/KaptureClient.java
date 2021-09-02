@@ -306,6 +306,24 @@ public class KaptureClient<E> {
     }
 
     /**
+     * Post to a custom endpoint
+     *
+     * @param entity the list of an entity to create or update
+     * @param endpointSuffix the suffix of the endpoint to custom post to
+     * @return A response with a Body equal to the created or updated entity. If created the {@code id} will now be
+     * set.
+     */
+    public ResponseEntity<List<E>> postToEndpoint(@Valid E entity, String endpointSuffix) {
+        return retryTemplate.execute(arg0 -> {
+                    HttpEntity<Object> requestEntity = new HttpEntity<Object>(entity);
+                    return restTemplate
+                            .exchange(endpoint + endpointSuffix, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<List<E>>() {
+                            });
+                }
+        );
+    }
+
+    /**
      * Deletes the entity with the matching {@code entityId}.
      *
      * @param entityId the id of the entity to delete
